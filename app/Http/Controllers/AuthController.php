@@ -31,7 +31,7 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        $token = auth('user')->attempt($credentials);
+        $token = auth('api')->attempt($credentials);
         if (!$token) {
             return response()->json([
                 'status' => 'error',
@@ -66,7 +66,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $doctor = Auth::doctor();
+        $doctor = auth('doctor')->user();
         return response()->json([
             'status' => 'success',
             'doctor' => $doctor,
@@ -81,21 +81,24 @@ class AuthController extends Controller
     {
         // Validate user input
         $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
 
         // Create a new user
         $user = User::create([
             'id' => check_uuid('App\Models\User', Uuid::generate()),
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'gender' => $request->gender,
         ]);
 
         // Send email verification notification
-        $user->sendEmailVerificationNotification();
+        // $user->sendEmailVerificationNotification();
 
         return response()->json(['message' => 'User registered successfully. Check your email for verification.']);
     } //
@@ -105,17 +108,20 @@ class AuthController extends Controller
     {
         // Validate doctor input
         $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:admins|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
 
         // Create a new admin
         $doctor = Doctor::create([
             'id' => check_uuid('App\Models\Doctor', Uuid::generate()),
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'gender' => $request->gender,
         ]);
 
         $professions = Profession::where('id', $request->profession)->get();
@@ -127,7 +133,7 @@ class AuthController extends Controller
             ]);
         }
 
-        $doctor->sendEmailVerificationNotification();
+        // $doctor->sendEmailVerificationNotification();
 
         return response()->json(['message' => 'Doctor registered successfully.']);
     } //

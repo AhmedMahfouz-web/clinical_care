@@ -1,7 +1,9 @@
 <?php
 
+use App\Events\MeetingScheduled;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ProfessionController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +53,12 @@ Route::group(['prefix' => 'dashboard'], function ($router) {
                 Route::post('/delete_profession/{profession}', 'destroy')->name('delete profession');
             });
         });
-        Route::get('/initial-meetings', [MeetingController::class, 'getInitialMeetings']);
+
+        Route::group(['prefix' => 'meeting'], function ($router) {
+            Route::group(['controller' => MeetingController::class], function () {
+                Route::get('/', 'get_meetings')->name('show meetings');
+                Route::post('update_status/{meeting}', 'update_status')->name('update status');
+            });
+        });
     });
 });

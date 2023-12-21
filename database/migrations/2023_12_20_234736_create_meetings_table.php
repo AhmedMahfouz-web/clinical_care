@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('doctor_id')->constrained('doctors');
-            $table->string('meeting_id')->nullable();
+            $table->string('jisti_id')->nullable();
             $table->string('status')->default('pending');
+            $table->string('price');
             $table->string('image')->nullable();
-            $table->timestamp('start_at', $precision = 0);
+            $table->timestamp('start_at');
             $table->timestamps();
         });
     }

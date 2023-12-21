@@ -18,7 +18,7 @@ class Doctor extends Authenticatable implements MustVerifyEmail, JWTSubject
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'name', 'email', 'password', 'image', 'bio', 'gender'
+        'id', 'first_name', 'last_name', 'email', 'password', 'image', 'bio', 'gender'
     ];
 
     protected $hidden = [

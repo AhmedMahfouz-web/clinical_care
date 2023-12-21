@@ -80,18 +80,19 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @section('script')
-        <script>
-            let delete_btn = document.getElementsByClassName('delete_btn');
-            const submit_btn = document.getElementById('delete_btn');
-            for (let i = 0; i < delete_btn.length; i++) {
-                delete_btn[i].addEventListener('click', function() {
-                    console.log(delete_btn[i].getAttribute('data-form'))
-                    submit_btn.setAttribute('form', delete_btn[i].getAttribute('data-form'));
-                })
+@section('script')
+    <script>
+        let delete_btn = document.getElementsByClassName('delete_btn');
+        const submit_btn = document.getElementById('delete_btn');
+        for (let i = 0; i < delete_btn.length; i++) {
+            delete_btn[i].addEventListener('click', function() {
+                console.log(delete_btn[i].getAttribute('data-form'))
+                submit_btn.setAttribute('form', delete_btn[i].getAttribute('data-form'));
+            })
 
-            };
-        </script>
-    @endsection
+        };
+    </script>
+@endsection

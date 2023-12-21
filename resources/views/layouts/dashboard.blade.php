@@ -4,13 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Webpixels">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>:: BigBucket :: Home</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/themify-icons/themify-icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free-6.5.1-web/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free-6.5.1-web/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free-6.5.1-web/css/all.css') }}">
 
     <!-- Select2 -->
@@ -25,6 +23,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/rtl.css') }}" type="text/css">
+    <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
 </head>
 
 <body class="theme-indigo rtl">
@@ -62,21 +61,9 @@
     <script src="{{ asset('js/pages/index.js') }}"></script>
     <script src="{{ asset('js/pages/todo-js.js') }}"></script>
     <script src="{{ asset('js/pages/advanced-form.js') }}"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
     @yield('script')
-    <script>
-        import Echo from "laravel-echo"
-
-        window.Pusher = require('pusher-js');
-
-        window.Echo = new Echo({
-            broadcaster: 'pusher',
-            key: 'your-pusher-key',
-            wsHost: window.location.hostname,
-            wsPort: 6001,
-            forceTLS: false,
-            disableStats: true,
-        });
-    </script>
 </body>
 
 </html>
