@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('desc');
+            $table->string('profession');
+            $table->string('family_related');
+            $table->string('sleep_on_hospital');
+            $table->string('surgery');
+            $table->string('notes');
+            $table->string('doctor_id')->nullable();
+            $table->string('doctor_comment')->nullable();
+            $table->string('user_id');
             $table->timestamps();
         });
     }

@@ -9,6 +9,26 @@ use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
+    public function show_all_doctor()
+    {
+        $doctors = Doctor::all();
+
+        return response()->json([
+            'message' => 'success',
+            'doctor' => $doctors
+        ]);
+    }
+
+    public function show_all_doctor_home()
+    {
+        $doctors = Doctor::get(6);
+
+        return response()->json([
+            'message' => 'success',
+            'doctor' => $doctors
+        ]);
+    }
+
     public function show_doctor(Doctor $doctor)
     {
 

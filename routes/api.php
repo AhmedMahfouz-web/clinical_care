@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ProfessionController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationApiController;
 use Illuminate\Http\Request;
@@ -38,12 +39,20 @@ Route::group(['middleware' => 'api'], function () {
         Route::delete('/destroy/{id}', 'destroy_user');
     });
 
-    Route::get('doctor/search/{name}&{profession}', [DoctorController::class, 'search'])->name('search_doctors');
 
     Route::get('/email/verify/{id}/{hash}', VerificationApiController::class)->name('verification.verify');
 
     Route::post('create_meeting', [MeetingController::class, 'create_meeting'])->name('create_meeting');
+
+    Route::group(['prefix' => 'report', 'controller' => ReportController::class], function ($router) {
+        Route::get('create', 'create');
+        Route::post('store', 'store');
+    });
 });
+
+Route::get('doctor/search/{name}&{profession}', [DoctorController::class, 'search'])->name('search_doctors');
+Route::get('doctor/', [DoctorController::class, 'show_all_doctors']);
+Route::get('doctor/home', [DoctorController::class, 'show_all_doctors_home']);
 
 Route::middleware(['auth:doctor'])->group(function () {
     Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {
