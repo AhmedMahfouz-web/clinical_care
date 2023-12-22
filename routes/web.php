@@ -4,6 +4,7 @@ use App\Events\MeetingScheduled;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ProfessionController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,17 @@ Route::group(['prefix' => 'dashboard'], function ($router) {
                 Route::get('/edit_profession/{profession}', 'edit')->name('edit profession');
                 Route::post('/update_profession/{profession}', 'update')->name('update profession');
                 Route::post('/delete_profession/{profession}', 'destroy')->name('delete profession');
+            });
+        });
+
+        Route::group(['prefix' => 'hospital'], function ($router) {
+            Route::group(['controller' => HospitalController::class], function () {
+                Route::get('/', 'index')->name('show hospitals');
+                Route::get('/create_hospital', 'create')->name('create hospital');
+                Route::post('/store_hospital', 'store')->name('store hospital');
+                Route::get('/edit_hospital/{hospital}', 'edit')->name('edit hospital');
+                Route::post('/update_hospital/{hospital}', 'update')->name('update hospital');
+                Route::post('/delete_hospital/{hospital}', 'destroy')->name('delete hospital');
             });
         });
 

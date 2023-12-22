@@ -18,7 +18,17 @@ class Doctor extends Authenticatable implements MustVerifyEmail, JWTSubject
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'first_name', 'last_name', 'email', 'password', 'image', 'bio', 'gender'
+        'id',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'image',
+        'bio',
+        'gender',
+        'phone',
+        'work_at',
+        'degree',
     ];
 
     protected $hidden = [
@@ -31,9 +41,9 @@ class Doctor extends Authenticatable implements MustVerifyEmail, JWTSubject
         'password' => 'hashed',
     ];
 
-    public function professions()
+    public function profession()
     {
-        return $this->belongsToMany(Profession::class, 'doctor_professions', 'doctor_id', 'profession_id');
+        return $this->belongsTo(Profession::class);
     }
 
     public function getJWTIdentifier()

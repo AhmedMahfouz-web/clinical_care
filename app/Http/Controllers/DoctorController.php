@@ -34,29 +34,29 @@ class DoctorController extends Controller
 
         // Validate input
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:doctors,email,' . $doctor->id,
-            'password' => 'sometimes|required|string|min:6|confirmed',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'bio' => 'required|string',
+            'phone' => 'required|numeric|max:255',
+            'work_at' => 'required|string|max:255',
+            'profession' => 'required',
         ]);
-
-        $doctor->profession()->delete();
-
-        $professions = Profession::where('id', $request->profession)->get();
-
-        foreach ($professions as $profession) {
-            DoctorProfession::create([
-                'doctor_id' => $doctor->id,
-                'profession_id' => $profession->id,
-            ]);
-        }
 
         // Update doctor
         $doctor->update([
-            'name' => $request->name,
-            'age' => $request->age,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'bio' => $request->bio,
+            'phone' => $request->phone,
+            'work_at' => $request->work_at,
+            'profession_id' => $request->profession
         ]);
 
-        return response()->json(['message' => 'doctor profile updated successfully']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'doctor profile updated successfully',
+            'doctor' => $doctor->with('profession'),
+        ]);
     }
 
     // Destroy (delete) doctor profile

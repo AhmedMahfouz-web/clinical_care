@@ -100,7 +100,10 @@ class AuthController extends Controller
         // Send email verification notification
         // $user->sendEmailVerificationNotification();
 
-        return response()->json(['message' => 'User registered successfully. Check your email for verification.']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User registered successfully. Check your email for verification.'
+        ]);
     } //
 
     // Doctor registration
@@ -110,8 +113,12 @@ class AuthController extends Controller
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:admins|max:255',
-            'password' => 'required|string|min:6',
+            'work_at' => 'required|string|max:255',
+            'bio' => 'required|string',
+            'phone' => 'required|numeric|max:255',
+            'profession' => 'required',
+            'email' => 'required|string|email|unique:doctors|max:255',
+            'password' => 'required|string|min:8',
         ]);
 
         // Create a new admin
@@ -120,22 +127,20 @@ class AuthController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
+            'phone' => $request->phone,
+            'profession_id' => $request->profession,
+            'work_at' => $request->work_at,
+            'bio' => $request->bio,
             'password' => Hash::make($request->password),
             'gender' => $request->gender,
         ]);
 
-        $professions = Profession::where('id', $request->profession)->get();
-
-        foreach ($professions as $profession) {
-            $doctor_profession = DoctorProfession::create([
-                'doctor_id' => $doctor->id,
-                'profession_id' => $profession->id
-            ]);
-        }
-
         // $doctor->sendEmailVerificationNotification();
 
-        return response()->json(['message' => 'Doctor registered successfully.']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Doctor registered successfully.'
+        ]);
     } //
 
     public function logout()
