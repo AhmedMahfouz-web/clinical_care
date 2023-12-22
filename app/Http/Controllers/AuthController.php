@@ -115,7 +115,7 @@ class AuthController extends Controller
             'last_name' => 'required|string|max:255',
             'work_at' => 'required|string|max:255',
             'bio' => 'required|string',
-            'phone' => 'required|numeric|max:255',
+            'phone' => 'required|numeric',
             'profession' => 'required',
             'email' => 'required|string|email|unique:doctors|max:255',
             'password' => 'required|string|min:8',
