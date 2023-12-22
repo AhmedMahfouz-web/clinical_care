@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('family_related');
             $table->string('sleep_on_hospital');
             $table->string('surgery');
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->string('doctor_id')->nullable();
             $table->string('doctor_comment')->nullable();
             $table->string('user_id');

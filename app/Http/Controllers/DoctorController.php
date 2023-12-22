@@ -89,30 +89,26 @@ class DoctorController extends Controller
     }
 
     // Search Doctors
-    public function searchDoctors(Request $request)
+    public function search($name, $profession)
     {
-        $request->validate([
-            'search' => 'nullable|string|max:255',
-            'profession' => 'nullable|string|max:255'
-        ]);
 
         // Start with a base query
         $query = Doctor::query();
 
-        if ($request->filled('profession')) {
-            $query->whereHas('professions', function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->input('profession') . '%');
+        if ($profession != null) {
+            $query->whereHas('professions', function ($q) use ($profession) {
+                $q->where('name', 'like', '%' . $profession . '%');
             });
         }
 
         // Apply search query if provided
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('first_name', 'like', '%' . $request->input('search') . '%')
-                    ->orWhere('last_name', 'like', '%' . $request->input('search') . '%')
-                    ->orWhere('bio', 'like', '%' . $request->input('search') . '%')
-                    ->orWhereHas('professions', function ($profQuery) use ($request) {
-                        $profQuery->where('name', 'like', '%' . $request->input('search') . '%');
+        if ($name) {
+            $query->where(function ($q) use ($name) {
+                $q->where('first_name', 'like', '%' . $name . '%')
+                    ->orWhere('last_name', 'like', '%' . $name . '%')
+                    ->orWhere('bio', 'like', '%' . $name . '%')
+                    ->orWhereHas('professions', function ($profQuery) use ($name) {
+                        $profQuery->where('name', 'like', '%' . $name . '%');
                     });
                 // Add more fields to search if needed
             });

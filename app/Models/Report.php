@@ -10,6 +10,15 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'title',
+        'desc',
+        'profession',
+        'family_related',
+        'sleep_on_hospital',
+        'surgery',
+        'notes',
+        'doctor_id',
+        'doctor_comment',
+        'user_id'
     ];
 }
