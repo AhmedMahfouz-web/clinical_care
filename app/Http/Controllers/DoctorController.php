@@ -95,12 +95,12 @@ class DoctorController extends Controller
         // Start with a base query
         $query = Doctor::query();
 
-        if ($profession != null) {
+        if ($profession != 'null') {
             $query->where('profession', 'like', '%' . $profession . '%');
         }
 
         // Apply search query if provided
-        if ($name != null) {
+        if ($name != 'null') {
             $query->where(function ($q) use ($name) {
                 $q->where('first_name', 'like', '%' . $name . '%')
                     ->orWhere('last_name', 'like', '%' . $name . '%')
