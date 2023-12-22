@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationApiController;
 use Illuminate\Http\Request;
@@ -52,3 +53,5 @@ Route::middleware(['auth:doctor'])->group(function () {
         Route::delete('/destroy/{id}', 'destroy_doctor');
     });
 });
+
+Route::get('get_professions', [ProfessionController::class, 'index_api']);

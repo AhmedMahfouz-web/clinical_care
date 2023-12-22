@@ -14,6 +14,16 @@ class ProfessionController extends Controller
         return view('pages.professions.index', compact('professions'));
     }
 
+    public function index_api()
+    {
+        $professions = Profession::all();
+
+        return response()->json([
+            'status' => 'success',
+            'professions' => $professions
+        ]);
+    }
+
     public function create()
     {
         return view('pages.professions.create');
