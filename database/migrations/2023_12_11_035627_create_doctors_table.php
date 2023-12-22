@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('bio');
             $table->string('work_at');
-            $table->string('profession_id');
+            $table->string('profession');
             $table->string('degree')->nullable();
             $table->string('phone');
             $table->string('gender');

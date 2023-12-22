@@ -29,6 +29,7 @@ class Doctor extends Authenticatable implements MustVerifyEmail, JWTSubject
         'phone',
         'work_at',
         'degree',
+        'profession'
     ];
 
     protected $hidden = [
