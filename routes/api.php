@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
@@ -53,6 +54,8 @@ Route::group(['middleware' => 'api'], function () {
 Route::get('doctor/search/{name}&{profession}', [DoctorController::class, 'search'])->name('search_doctors');
 Route::get('doctor/', [DoctorController::class, 'show_all_doctors']);
 Route::get('doctor/home', [DoctorController::class, 'show_all_doctors_home']);
+Route::get('notifications', [NotificationsController::class, 'get_notification']);
+Route::get('notifications/{notification}', [NotificationsController::class, 'read_notification']);
 
 Route::middleware(['auth:doctor'])->group(function () {
     Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {

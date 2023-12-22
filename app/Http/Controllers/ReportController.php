@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Notification;
 use App\Models\Profession;
 use App\Models\Report;
 use Illuminate\Http\Request;
@@ -53,8 +54,14 @@ class ReportController extends Controller
     public function assign_doctor(Request $request, Report $report)
     {
         $report->update([
-            'doctor_id', $request->id
+            'doctor_id', $request->doctor_id
         ]);
+
+        $notification = Notification::create([
+            'receiver_id' => $request->doctor_id,
+            'body' => 'تم الحاقك لعمل تقرير جديد لاحد المرضي ',
+        ]);
+
 
         return redirect()->route('show reports');
     }

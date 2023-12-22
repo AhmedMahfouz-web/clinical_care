@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            $table->string('reciever_id');
+            $table->string('body');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
