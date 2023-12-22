@@ -21,7 +21,7 @@ class DoctorController extends Controller
 
     public function show_all_doctors_home()
     {
-        $doctors = Doctor::get(6);
+        $doctors = Doctor::take(6)->get();
 
         return response()->json([
             'message' => 'success',
