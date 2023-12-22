@@ -112,7 +112,7 @@ class DoctorController extends Controller
         }
 
         // Retrieve the filtered and searched doctors with their professions
-        $doctors = $query->with('profession')->get();
+        $doctors = $query->get();
 
         return response()->json([
             'status' => 'success',
