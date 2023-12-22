@@ -69,7 +69,7 @@ class DoctorController extends Controller
             'bio' => $request->bio,
             'phone' => $request->phone,
             'work_at' => $request->work_at,
-            'profession_id' => $request->profession
+            'profession' => $request->profession
         ]);
 
         return response()->json([
@@ -96,9 +96,7 @@ class DoctorController extends Controller
         $query = Doctor::query();
 
         if ($profession != null) {
-            $query->whereHas('professions', function ($q) use ($profession) {
-                $q->where('name', 'like', '%' . $profession . '%');
-            });
+            $query->where('profession', 'like', '%' . $profession . '%');
         }
 
         // Apply search query if provided
@@ -107,9 +105,8 @@ class DoctorController extends Controller
                 $q->where('first_name', 'like', '%' . $name . '%')
                     ->orWhere('last_name', 'like', '%' . $name . '%')
                     ->orWhere('bio', 'like', '%' . $name . '%')
-                    ->orWhereHas('professions', function ($profQuery) use ($name) {
-                        $profQuery->where('name', 'like', '%' . $name . '%');
-                    });
+                    ->orWhere('profession', 'like', '%' . $name . '%');
+
                 // Add more fields to search if needed
             });
         }
