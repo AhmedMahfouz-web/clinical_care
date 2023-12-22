@@ -19,6 +19,22 @@ class Report extends Model
         'notes',
         'doctor_id',
         'doctor_comment',
-        'user_id'
+        'user_id',
+        'transaction'
     ];
+
+    public function user()
+    {
+        $this->belongsTo(User::class);
+    }
+
+    public function doctor()
+    {
+        $this->belongsTo(Doctor::class);
+    }
+
+    public function files()
+    {
+        $this->hasMany(file::class);
+    }
 }

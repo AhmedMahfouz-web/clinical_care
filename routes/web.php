@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ProfessionController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,10 +57,32 @@ Route::group(['prefix' => 'dashboard'], function ($router) {
             });
         });
 
+        Route::group(['prefix' => 'tests'], function ($router) {
+            Route::group(['controller' => TestController::class], function () {
+                Route::get('/', 'index')->name('show tests');
+                Route::get('/create_test', 'create')->name('create test');
+                Route::post('/store_test', 'store')->name('store test');
+                Route::get('/edit_test/{test}', 'edit')->name('edit test');
+                Route::post('/update_test/{test}', 'update')->name('update test');
+                Route::post('/delete_test/{test}', 'destroy')->name('delete test');
+            });
+        });
+
         Route::group(['prefix' => 'hospital'], function ($router) {
             Route::group(['controller' => HospitalController::class], function () {
                 Route::get('/', 'index')->name('show hospitals');
                 Route::get('/create_hospital', 'create')->name('create hospital');
+                Route::post('/store_hospital', 'store')->name('store hospital');
+                Route::get('/edit_hospital/{hospital}', 'edit')->name('edit hospital');
+                Route::post('/update_hospital/{hospital}', 'update')->name('update hospital');
+                Route::post('/delete_hospital/{hospital}', 'destroy')->name('delete hospital');
+            });
+        });
+
+        Route::group(['prefix' => 'report'], function ($router) {
+            Route::group(['controller' => ReportController::class], function () {
+                Route::get('/', 'index')->name('show reports');
+                Route::get('/show/{report}', 'show')->name('show one report');
                 Route::post('/store_hospital', 'store')->name('store hospital');
                 Route::get('/edit_hospital/{hospital}', 'edit')->name('edit hospital');
                 Route::post('/update_hospital/{hospital}', 'update')->name('update hospital');

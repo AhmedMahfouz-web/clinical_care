@@ -6,7 +6,7 @@
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h2> اضافة تخصص</h2>
+                        <h2> اضافة مشفي او معمل</h2>
                     </div>
                     <div class="body">
                         <form action="{{ route('store hospital') }}" method="post">
@@ -15,7 +15,7 @@
                                 <div class="form-group col-6 mb-3">
                                     <label for="name" class="mr-1 control-label">اسم المشفي</label>
                                     <input type="text" id="name" name="name" class="form-control"
-                                        placeholder="اسم التخصص" aria-label="name" aria-describedby="basic-addon1">
+                                        placeholder="اسم المشفي" aria-label="name" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="form-group col-6 mb-3">
                                     <label for="type" class="mr-1 control-label"> النوع</label>
@@ -30,7 +30,7 @@
                                 <div class="form-group col-6 mb-3">
                                     <label for="phone" class="mr-1 control-label">رقم الهاتف</label>
                                     <input type="text" id="phone" name="phone" class="form-control"
-                                        placeholder="اسم المشفي" aria-label="name" aria-describedby="basic-addon1">
+                                        placeholder="رقم الهاتف" aria-label="name" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="form-group col-6 mb-3">
                                     <label for="bio" class="mr-1 control-label">نبذة</label>

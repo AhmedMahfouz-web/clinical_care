@@ -6,6 +6,7 @@ use App\Models\Doctor;
 use App\Models\Notification;
 use App\Models\Profession;
 use App\Models\Report;
+use App\Models\file;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -29,6 +30,11 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
+        if (!empty($request->transaction)) {
+            $transaction_name = time() . '.' . $request->transaction->extension();
+
+            $request->transaction->move(public_path('images/transaction'), $transaction_name);
+        }
 
         $report = Report::create([
             'title' => $request->title,
@@ -38,8 +44,23 @@ class ReportController extends Controller
             'sleep_on_hospital' => $request->sleep_on_hospital,
             'surgery' => $request->surgery,
             'notes' => $request->notes,
+            'transaction' => $transaction_name,
             'user_id' => auth()->user()->id
         ]);
+
+        if (!empty($request->file))
+            foreach ($$request->file as $file) {
+                $file_name = $file->getClientOriginalName();
+                $file_extention = $file->extension();
+                $request->file->move(public_path('files'), $file_name . '.' . $file_extention);
+
+                file::create([
+                    'name' => $file_name,
+                    'path' => $file_name . '.' . $file_extention,
+                    'report_id' => $report->id
+                ]);
+            }
+
 
         return response()->json([
             'status' => 'success',

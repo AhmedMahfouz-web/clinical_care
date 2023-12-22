@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('notes')->nullable();
             $table->string('doctor_id')->nullable();
             $table->string('doctor_comment')->nullable();
+            $table->string('transaction');
             $table->string('user_id');
             $table->timestamps();
         });
