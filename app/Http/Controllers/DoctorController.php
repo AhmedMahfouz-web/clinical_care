@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
-    public function show_all_doctor()
+    public function show_all_doctors()
     {
         $doctors = Doctor::all();
 
@@ -19,7 +19,7 @@ class DoctorController extends Controller
         ]);
     }
 
-    public function show_all_doctor_home()
+    public function show_all_doctors_home()
     {
         $doctors = Doctor::get(6);
 

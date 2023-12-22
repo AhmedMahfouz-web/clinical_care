@@ -28,6 +28,7 @@ class ReportController extends Controller
     public function store()
     {
 
+        
 
         return response()->json([
             'status' => 'success',
