@@ -100,7 +100,7 @@ class DoctorController extends Controller
         }
 
         // Apply search query if provided
-        if ($name) {
+        if ($name != null) {
             $query->where(function ($q) use ($name) {
                 $q->where('first_name', 'like', '%' . $name . '%')
                     ->orWhere('last_name', 'like', '%' . $name . '%')
@@ -115,7 +115,7 @@ class DoctorController extends Controller
         $doctors = $query->with('profession')->get();
 
         return response()->json([
-            'message' => 'success',
+            'status' => 'success',
             'doctors' => $doctors
         ]);
     }
