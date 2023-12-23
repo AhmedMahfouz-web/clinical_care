@@ -44,38 +44,26 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>الاسم</th>
-                                                <th>النوع</th>
+                                                <th>العنوان</th>
+                                                <th>المريض</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($tests as $index => $test)
-                                                <tr>
-                                                    <td>{{ $index + 1 }}</td>
-                                                    <td><span>{{ $test->name }}</span></td>
-                                                    <td><span>{{ $test->type }}</span></td>
-                                                    <td>
-                                                        <a href="{{ route('edit test', $test->id) }}"
-                                                            class="btn btn-warning btn-md"><i
-                                                                class="fa-regular fa-pen-to-square"></i></a>
-                                                        <form class="d-inline" id="form-{{ $test->id }}"
-                                                            action="{{ route('delete test', $test) }}" method="post">
-                                                            @csrf
-                                                            <button type="button" data-toggle="modal"
-                                                                data-target="#modal_5" data-form="form-{{ $test->id }}"
-                                                                class="btn btn-danger btn-md delete_btn"><i
-                                                                    class="fa-regular fa-trash-can"></i></button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
+                                            @foreach ($reports as $index => $report)
+                                                <a href="{{ Route('show one report', $report->id) }}">
+                                                    <tr>
+                                                        <td>{{ $index + 1 }}</td>
+                                                        <td><span>{{ $report->title }}</span></td>
+                                                        <td><span>{{ $report->user->name }}</span></td>
+                                                    </tr>
+                                                </a>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
