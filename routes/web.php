@@ -82,11 +82,12 @@ Route::group(['prefix' => 'dashboard'], function ($router) {
         Route::group(['prefix' => 'report'], function ($router) {
             Route::group(['controller' => ReportController::class], function () {
                 Route::get('/', 'index')->name('show reports');
-                Route::get('/show/{report}', 'show')->name('show one report');
-                Route::post('/store_hospital', 'store')->name('store hospital');
-                Route::get('/edit_hospital/{hospital}', 'edit')->name('edit hospital');
-                Route::post('/update_hospital/{hospital}', 'update')->name('update hospital');
-                Route::post('/delete_hospital/{hospital}', 'destroy')->name('delete hospital');
+                Route::get('/answered', 'answered_reports')->name('show answered reports');
+                Route::get('/show/{report}', 'show_dashboard')->name('show one report');
+                Route::post('/assign_doctor/{report}', 'a')->name('assign doctor');
+                // Route::get('/edit_hospital/{hospital}', 'edit')->name('edit hospital');
+                // Route::post('/update_hospital/{hospital}', 'update')->name('update hospital');
+                // Route::post('/delete_hospital/{hospital}', 'destroy')->name('delete hospital');
             });
         });
 

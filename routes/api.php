@@ -64,6 +64,9 @@ Route::middleware(['auth:doctor'])->group(function () {
         Route::put('/update/{id}', 'update_doctor');
         Route::delete('/destroy/{id}', 'destroy_doctor');
     });
+
+    Route::get('/report/{report}', [ReportController::class, 'get_report']);
+    Route::post('/report/{report}/answer', [ReportController::class, 'answer']);
 });
 
 Route::get('get_professions', [ProfessionController::class, 'index_api']);

@@ -18,6 +18,13 @@ class ReportController extends Controller
         return view('pages.reports.index', compact('reports'));
     }
 
+    public function answered_reports()
+    {
+        $reports = Report::where('doctor_comment', '!=', null)->get();
+
+        return view('pages.reports.answered', compact('reports'));
+    }
+
     public function create()
     {
         $professions = Profession::all();
@@ -69,6 +76,7 @@ class ReportController extends Controller
 
     public function show_dashboard(Report $report)
     {
+        $report = $report->with(['files', 'user']);
         return view('pages.reports.show', compact('report'));
     }
 
@@ -85,5 +93,34 @@ class ReportController extends Controller
 
 
         return redirect()->route('show reports');
+    }
+
+    public function get_report(Report $report)
+    {
+        if (auth()->user()->id == $report->doctor_id) {
+            return response()->json([
+                'status' => 'success',
+                'report' => $report->with(['files', 'user']),
+            ]);
+        }
+    }
+
+    public function answer(Request $request, Report $report)
+    {
+        if (auth()->user()->id == $report->doctor_id) {
+            $report->update([
+                'doctor_comment', $request->answer
+            ]);
+
+            $notification = Notification::create([
+                'receiver_id' => $report->user_id,
+                'body' => 'تم الرد علي طلب التقرير الخاص بك ',
+            ]);
+        }
+
+
+        return response()->json([
+            'status' => 'success',
+        ]);
     }
 }

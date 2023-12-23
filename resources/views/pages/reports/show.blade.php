@@ -62,7 +62,7 @@
                         <div class="col-md-6">
                             <img style="width: 300px" src="{{ $report->transaction }}" alt="">
                         </div>
-                        <form action="{{ route('assign doctor') }}" id="assign_doctor" method="post">
+                        <form action="{{ route('assign doctor', $report->id) }}" id="assign_doctor" method="post">
                             @csrf
                             <div class="col-lg-12">
                                 <small class="text-muted">تعيين دكتور:</small>
@@ -74,6 +74,8 @@
                                 </select>
                             </div>
                         </form>
+                        <button type="submit" class="btn btn-md btn-primary" form="assign_doctor">حفظ</button>
+                        <a href="{{ route('show reports') }}" class="btn btn-md btn-secondary">الغاء</a>
                     </div>
                 </div>
             </div>

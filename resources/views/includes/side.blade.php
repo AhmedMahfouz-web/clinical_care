@@ -18,6 +18,14 @@
             <li {{ Request::is('dashboard') ? 'class=active' : '' }}><a href="{{ route('dashboard') }}"><i
                         class="ti-home"></i><span>الرئيسية</span></a></li>
 
+            <li {{ Request::is('dashboard/report/*', 'dashboard/report') ? 'class=active' : '' }}>
+                <a href="javascript:void(0)" class="has-arrow"><i class="ti-user "></i><span>طلبات التقارير</span>
+                </a>
+                <ul>
+                    <li><a href="{{ route('show reports') }}">عرض طلبات التقارير</a></li>
+                    <li><a href="{{ route('show answered reports') }}">عرض التقارير </a></li>
+                </ul>
+            </li>
             <li {{ Request::is('dashboard/hospital/*', 'dashboard/hospital') ? 'class=active' : '' }}>
                 <a href="javascript:void(0)" class="has-arrow"><i class="ti-user "></i><span>المستشفيات و المعامل</span>
                 </a>
