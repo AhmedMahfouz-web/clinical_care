@@ -1,29 +1,6 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="modal modal-danger fade" id="modal_5" tabindex="-1" role="dialog" aria-labelledby="modal_5"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modal_title_6">احترس !</h5>
-                    <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="py-3 text-center">
-                        <i class="fa fa-exclamation-circle fa-4x"></i>
-                        <h4 class="heading mt-4">هل انت متأكد من حذف الاشعة او التحليل ؟</h4>
-                        <p> للموافقة اضغط "حذف"</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-md " data-dismiss="modal">الغاء</button>
-                    <button type="submit" form="" id="delete_btn" class="btn btn-md btn-secondary">حذف</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container-fluid">
 
         <div class="tab-content">
@@ -32,11 +9,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="header">
-                                <h2>قائمة الاشعات و التحاليل</h2>
-                                <div class="text-left">
-                                    <a href="{{ route('create test') }}" class="btn btn-md btn-primary ">اضافة
-                                        اشعة او تحليل</a>
-                                </div>
+                                <h2>التقارير المرفقة</h2>
                             </div>
                             <div class="body">
                                 <div class="table-responsive">

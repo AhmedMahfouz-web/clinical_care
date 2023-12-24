@@ -34,8 +34,8 @@
                                     <select name="role" id="role" class="form-control show-tick ms select2"
                                         data-placeholder="اختر الوظيفة">
                                         <option></option>
-                                        <option value="owner">صاحب المنشأة</option>
-                                        <option value="admin">ادمن</option>
+                                        <option value="صاحب منشأة">صاحب المنشأة</option>
+                                        <option value="ادمن">ادمن</option>
                                     </select>
                                 </div>
                             </div>

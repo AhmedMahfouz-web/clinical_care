@@ -25,10 +25,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'api'], function () {
 
     Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function ($router) {
-        Route::post('login/user', 'login_user');
-        Route::post('login/doctor', 'login_doctor');
         Route::post('logout', 'logout');
         Route::post('refresh', 'refresh');
+        Route::post('login/user', 'login_user');
+        Route::post('login/doctor', 'login_doctor');
         Route::post('register/user', 'register_user');
         Route::post('register/doctor', 'register_doctor');
     });
@@ -49,9 +49,9 @@ Route::group(['middleware' => 'api'], function () {
         Route::get('create', 'create');
         Route::post('store', 'store');
     });
+    Route::get('doctor/search/{name}&{profession}', [DoctorController::class, 'search'])->name('search_doctors');
 });
 
-Route::get('doctor/search/{name}&{profession}', [DoctorController::class, 'search'])->name('search_doctors');
 Route::get('doctor/', [DoctorController::class, 'show_all_doctors']);
 Route::get('doctor/home', [DoctorController::class, 'show_all_doctors_home']);
 Route::get('notifications', [NotificationsController::class, 'get_notification']);

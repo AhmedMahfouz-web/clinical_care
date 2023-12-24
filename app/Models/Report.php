@@ -25,12 +25,12 @@ class Report extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function doctor()
     {
-        $this->belongsTo(Doctor::class);
+        $this->belongsTo(Doctor::class, 'doctor_id', 'id');
     }
 
     public function files()

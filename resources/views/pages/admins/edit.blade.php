@@ -37,9 +37,10 @@
                                     <select name="role" id="role" class="form-control show-tick ms select2"
                                         data-placeholder="اختر الوظيفة">
                                         <option></option>
-                                        <option {{ $admin->role == 'owner' ? 'selected' : '' }} value="owner">صاحب المنشأة
+                                        <option {{ $admin->role == 'صاحب منشأة' ? 'selected' : '' }} value="صاحب منشأة">صاحب
+                                            المنشأة
                                         </option>
-                                        <option {{ $admin->role == 'admin' ? 'selected' : '' }} value="admin">ادمن</option>
+                                        <option {{ $admin->role == 'ادمن' ? 'selected' : '' }} value="ادمن">ادمن</option>
                                     </select>
                                 </div>
                             </div>

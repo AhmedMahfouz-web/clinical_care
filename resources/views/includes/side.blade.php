@@ -4,8 +4,8 @@
             <div class="image"><a href="javascript:void(0);"><img src="{{ asset('images/user.png') }}" alt="User"></a>
             </div>
             <div class="detail mt-3">
-                <h5 class="mb-0">{{ auth()->guard('admin')->user('admin')->name }}</h5>
-                <small>{{ auth()->guard('admin')->user('admin')->role }}</small>
+                <h5 class="mb-0">{{ auth()->guard('admin')->user()->name }}</h5>
+                <small>{{ auth()->guard('admin')->user()->role }}</small>
             </div>
             <div class="social">
                 <a href="javascript:void(0);" title="facebook"><i class="ti-twitter-alt"></i></a>
@@ -50,14 +50,16 @@
                     <li><a href="{{ route('create profession') }}">اضافة تخصص</a></li>
                 </ul>
             </li>
-            <li {{ Request::is('dashboard/admin/*', 'dashboard/admin') ? 'class=active' : '' }}>
-                <a href="javascript:void(0)" class="has-arrow"><i class="ti-user "></i><span>الاداريون</span>
-                </a>
-                <ul>
-                    <li><a href="{{ route('show admins') }}">عرض الاداريين</a></li>
-                    <li><a href="{{ route('create admin') }}">اضافة اداري</a></li>
-                </ul>
-            </li>
+            @if (auth()->guard('admin')->user()->role == 'صاحب منشأة')
+                <li {{ Request::is('dashboard/admin/*', 'dashboard/admin') ? 'class=active' : '' }}>
+                    <a href="javascript:void(0)" class="has-arrow"><i class="ti-user "></i><span>الاداريون</span>
+                    </a>
+                    <ul>
+                        <li><a href="{{ route('show admins') }}">عرض الاداريين</a></li>
+                        <li><a href="{{ route('create admin') }}">اضافة اداري</a></li>
+                    </ul>
+                </li>
+            @endif
         </ul>
     </nav>
 </div>
