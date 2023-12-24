@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('sleep_on_hospital');
             $table->string('surgery');
             $table->string('notes')->nullable();
-            $table->foreignUuid('doctor_id')->references('id')->on('doctors')->onDelete('cascade')->nullable();
+            $table->foreignUuid('doctor_id')->nullable()->references('id')->on('doctors')->onDelete('cascade');
             $table->string('doctor_comment')->nullable();
             $table->string('transaction');
             $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
