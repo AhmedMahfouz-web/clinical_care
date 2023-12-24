@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('sleep_on_hospital');
             $table->string('surgery');
             $table->string('notes')->nullable();
-            $table->string('doctor_id')->nullable();
+            $table->foreignUuid('doctor_id')->references('id')->on('doctors')->onDelete('cascade')->nullable();
             $table->string('doctor_comment')->nullable();
             $table->string('transaction');
-            $table->string('user_id');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

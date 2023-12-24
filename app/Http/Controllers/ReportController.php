@@ -14,7 +14,7 @@ class ReportController extends Controller
     public function index()
     {
         $reports = Report::where('doctor_id', null)->with('user')->get();
-
+        dd($reports->user);
         return view('pages.reports.index', compact('reports'));
     }
 
