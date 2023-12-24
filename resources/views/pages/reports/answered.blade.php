@@ -33,6 +33,10 @@
                                                         </td>
                                                         <td><span>{{ $report->doctor->first_name . ' ' . $report->doctor->last_name }}</span>
                                                         </td>
+                                                        <td>
+                                                            <a class="btn btn-md btn-secondary"
+                                                                href="{{ Route('show answered report', $report->id) }}">عرض</a>
+                                                        </td>
                                                     </tr>
                                                 </a>
                                             @endforeach

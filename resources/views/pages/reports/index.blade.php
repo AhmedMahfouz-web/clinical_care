@@ -24,13 +24,17 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($reports as $index => $report)
-                                                <a href="{{ Route('show one report', $report->id) }}">
-                                                    <tr>
-                                                        <td>{{ $index + 1 }}</td>
-                                                        <td><span>{{ $report->title }}</span></td>
-                                                        <td><span>{{ $report->user->name }}</span></td>
-                                                    </tr>
-                                                </a>
+                                                <tr>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td><span>{{ $report->title }}</span></td>
+                                                    <td><span>{{ $report->user->first_name . ' ' . $report->user->last_name }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-md btn-secondary"
+                                                            href="{{ Route('show one report', $report->id) }}">عرض</a>
+                                                    </td>
+
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>

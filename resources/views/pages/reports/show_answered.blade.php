@@ -88,25 +88,20 @@
                         </div>
                         <hr>
                         <div class="row mb-5">
-                            <form class="display-block w-100" action="{{ route('assign doctor', $report->id) }}"
-                                id="assign_doctor" method="post">
-                                @csrf
-                                <div class="col-lg-6">
-                                    <h6 class="text-muted">تعيين دكتور:</h6>
-                                    <select name="doctor_id" id="doctor_id" class="form-control show-tick ms select2"
-                                        data-placeholder="تعيين دكتور">
-                                        @foreach ($doctors as $doctor)
-                                            <option value="{{ $doctor->id }}">
-                                                {{ $doctor->first_name . ' ' . $doctor->last_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </form>
+                            <div class="col-lg-6">
+                                <h6 class="text-muted">الدكتور:</h6>
+                                <h6>{{ $report->doctor->first_name . ' ' . $report->doctor->last_name }}</h6>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6 class="text-muted">رد الدكتور: </h6>
+                                <div>{!! $report->doctor_comment !!}</div>
+                            </div>
                         </div>
                         <div class="text-left">
-                            <button type="submit" class="btn btn-md btn-primary " form="assign_doctor">حفظ</button>
-                            <a href="{{ route('show reports') }}" class="btn btn-md btn-secondary">الغاء</a>
+                            <a href="{{ route('show answered reports') }}" class="btn btn-md btn-secondary">رجوع</a>
                         </div>
                     </div>
                 </div>

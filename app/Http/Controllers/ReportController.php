@@ -7,20 +7,20 @@ use App\Models\Notification;
 use App\Models\Profession;
 use App\Models\Report;
 use App\Models\file;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
     public function index()
     {
-        $reports = Report::where('doctor_id', null)->with('user')->get();
-        dd($reports->user);
+        $reports = Report::where('doctor_comment', null)->with('user')->latest()->get();
         return view('pages.reports.index', compact('reports'));
     }
 
     public function answered_reports()
     {
-        $reports = Report::where('doctor_comment', '!=', null)->get();
+        $reports = Report::where('doctor_comment', '!=', null)->with(['user', 'doctor'])->latest()->get();
 
         return view('pages.reports.answered', compact('reports'));
     }
@@ -76,14 +76,21 @@ class ReportController extends Controller
 
     public function show_dashboard(Report $report)
     {
-        $report = $report->with(['files', 'user']);
-        return view('pages.reports.show', compact('report'));
+        $report = $report->with(['files', 'user'])->first();
+        $doctors = Doctor::where('profession', $report->profession)->get();
+        return view('pages.reports.show', compact(['report', 'doctors']));
+    }
+
+    public function show_answered_dashboard(Report $report)
+    {
+        $report = $report->with(['files', 'user', 'doctor'])->first();
+        return view('pages.reports.show_answered', compact('report'));
     }
 
     public function assign_doctor(Request $request, Report $report)
     {
         $report->update([
-            'doctor_id', $request->doctor_id
+            'doctor_id' => $request->doctor_id
         ]);
 
         $notification = Notification::create([

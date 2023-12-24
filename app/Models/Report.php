@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Report extends Model
 {
@@ -25,16 +26,16 @@ class Report extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class, 'user_id', 'id');
+        return  $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function doctor()
     {
-        $this->belongsTo(Doctor::class, 'doctor_id', 'id');
+        return $this->belongsTo(Doctor::class, 'doctor_id', 'id');
     }
 
     public function files()
     {
-        $this->hasMany(file::class);
+        return $this->hasMany(file::class);
     }
 }
