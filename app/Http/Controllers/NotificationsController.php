@@ -12,7 +12,7 @@ class NotificationsController extends Controller
         if (auth()->user() != null) {
             $notifications = Notification::where('reciever_id', auth()->user()->id)->where('read_at', null)->latest()->get();
         } else {
-            $notifications = Notification::where('reciever_id', auth()->guard('admin')->user()->id)->where('read_at', null)->latest()->get();
+            $notifications = Notification::where('reciever_id', auth()->guard('doctor')->user()->id)->where('read_at', null)->latest()->get();
         }
 
         return response()->json([
