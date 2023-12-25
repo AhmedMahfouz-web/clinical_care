@@ -59,7 +59,7 @@ class ReportController extends Controller
             foreach ($request->file as $file) {
                 $file_name = $file->getClientOriginalName();
                 $file_extention = $file->extension();
-                $request->file->move(public_path('files'), $file_name . '.' . $file_extention);
+                $file->move(public_path('files'), $file_name . '.' . $file_extention);
 
                 file::create([
                     'name' => $file_name,
