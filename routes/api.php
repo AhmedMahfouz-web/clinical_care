@@ -57,14 +57,14 @@ Route::get('doctor/home', [DoctorController::class, 'show_all_doctors_home']);
 Route::get('notifications', [NotificationsController::class, 'get_notification']);
 Route::get('notifications/{notification}', [NotificationsController::class, 'read_notification']);
 
-Route::middleware(['auth:doctor'])->group(function () {
-    Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {
-        Route::get('/{id}', 'show_doctor');
-        Route::get('/edit/{id}', 'edit_doctor');
-        Route::put('/update/{id}', 'update_doctor');
-        Route::delete('/destroy/{id}', 'destroy_doctor');
-    });
+Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {
+    Route::get('/{doctor}', 'show_doctor');
+    Route::get('/edit/{doctor}', 'edit_doctor');
+    Route::put('/update/{doctor}', 'update_doctor');
+    Route::delete('/destroy/{doctor}', 'destroy_doctor');
+});
 
+Route::middleware(['auth:doctor'])->group(function () {
     Route::get('/report/{report}', [ReportController::class, 'get_report']);
     Route::post('/report/{report}/answer', [ReportController::class, 'answer']);
 });

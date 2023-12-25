@@ -31,7 +31,6 @@ class DoctorController extends Controller
 
     public function show_doctor(Doctor $doctor)
     {
-
         return response()->json([
             'message' => 'success',
             'doctor' => $doctor
