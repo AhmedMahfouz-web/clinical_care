@@ -56,7 +56,7 @@ class ReportController extends Controller
         ]);
 
         if (!empty($request->file))
-            foreach ($$request->file as $file) {
+            foreach ($request->file as $file) {
                 $file_name = $file->getClientOriginalName();
                 $file_extention = $file->extension();
                 $request->file->move(public_path('files'), $file_name . '.' . $file_extention);
