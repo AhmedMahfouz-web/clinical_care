@@ -153,7 +153,7 @@ class ReportController extends Controller
     {
         if (auth()->guard('doctor')->user()->id == $report->doctor_id) {
             $report->update([
-                'doctor_comment', $request->answer
+                'doctor_comment' => $request->answer
             ]);
 
             $notification = Notification::create([
