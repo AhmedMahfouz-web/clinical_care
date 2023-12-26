@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hospital;
 use App\Models\Notification;
 use App\Models\Profession;
 use App\Models\Reservation;
+use App\Models\Test;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -24,11 +26,12 @@ class ReservationController extends Controller
 
     public function create()
     {
-        $professions = Profession::all();
+        $hospitals = Hospital::all();
+        $test = Test::all();
 
         return response()->json([
             'status' => 'success',
-            'professions' => $professions
+            'professions' => $hospitals
         ]);
     }
 
