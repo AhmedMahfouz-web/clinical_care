@@ -129,7 +129,7 @@ class ReportController extends Controller
         if (auth()->user() != null) {
             if (auth()->user()->id == $report->user_id) {
 
-                $report = $report->with(['files', 'user'])->first();
+                $report = $report->with(['files', 'user', 'doctor'])->first();
 
                 return response()->json([
                     'status' => 'success',
