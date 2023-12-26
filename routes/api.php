@@ -67,7 +67,7 @@ Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], fu
 });
 
 Route::middleware(['auth:doctor'])->group(function () {
-    // Route::get('/report/{report}', [ReportController::class, 'get_report']);  
+    // Route::get('/report/{report}', [ReportController::class, 'get_report']);                                        
     Route::post('/report/{report}/answer', [ReportController::class, 'answer']);
 });
 

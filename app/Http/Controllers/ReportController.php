@@ -160,11 +160,14 @@ class ReportController extends Controller
                 'receiver_id' => $report->user_id,
                 'body' => 'تم الرد علي طلب التقرير الخاص بك ',
             ]);
+
+            return response()->json([
+                'status' => 'success',
+            ]);
+        } else {
+            response()->json([
+                'status' => 'error'
+            ]);
         }
-
-
-        return response()->json([
-            'status' => 'success',
-        ]);
     }
 }
