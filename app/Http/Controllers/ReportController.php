@@ -139,7 +139,7 @@ class ReportController extends Controller
         } else {
             if (auth()->guard('doctor')->user()->id == $report->doctor_id) {
 
-                $report = $report->with(['files', 'user'])->first();
+                $report = $report->with(['files', 'user', 'doctor'])->first();
 
                 return response()->json([
                     'status' => 'success',
