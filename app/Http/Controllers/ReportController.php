@@ -102,9 +102,30 @@ class ReportController extends Controller
         return redirect()->route('show reports');
     }
 
+    public function get_all_reports()
+    {
+        if (auth()->user()->id != null) {
+            $reports = Report::where('user_id', auth()->user()->id)->latest()->get();
+            return response()->json([
+                'status' => 'success',
+                'reports' => $reports,
+            ]);
+        } else {
+            $reports = Report::where('user_id', auth()->guard('doctor')->user()->id)->latest()->get();
+            return response()->json([
+                'status' => 'success',
+                'reports' => $reports,
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error'
+        ]);
+    }
+
     public function get_report(Report $report)
     {
-        if (auth()->user()->id == $report->doctor_id) {
+        if (auth()->guard('doctor')->user()->id == $report->doctor_id || auth()->user()->id == $report->user_id) {
             return response()->json([
                 'status' => 'success',
                 'report' => $report->with(['files', 'user']),
@@ -114,7 +135,7 @@ class ReportController extends Controller
 
     public function answer(Request $request, Report $report)
     {
-        if (auth()->user()->id == $report->doctor_id) {
+        if (auth()->guard('doctor')->user()->id == $report->doctor_id) {
             $report->update([
                 'doctor_comment', $request->answer
             ]);
