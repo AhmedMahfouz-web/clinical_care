@@ -111,7 +111,7 @@ class ReportController extends Controller
                 'reports' => $reports,
             ]);
         } else {
-            $reports = Report::where('user_id', auth()->guard('doctor')->user()->id)->select(['title', 'id', 'desc'])->latest()->get();
+            $reports = Report::where('doctor_id', auth()->guard('doctor')->user()->id)->select(['title', 'id', 'desc'])->latest()->get();
             return response()->json([
                 'status' => 'success',
                 'reports' => $reports,
