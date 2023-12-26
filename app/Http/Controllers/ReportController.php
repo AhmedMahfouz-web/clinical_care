@@ -105,13 +105,13 @@ class ReportController extends Controller
     public function get_all_reports()
     {
         if (auth()->user()->id != null) {
-            $reports = Report::where('user_id', auth()->user()->id)->latest()->get();
+            $reports = Report::where('user_id', auth()->user()->id)->select(['title', 'id', 'desc'])->latest()->get();
             return response()->json([
                 'status' => 'success',
                 'reports' => $reports,
             ]);
         } else {
-            $reports = Report::where('user_id', auth()->guard('doctor')->user()->id)->latest()->get();
+            $reports = Report::where('user_id', auth()->guard('doctor')->user()->id)->select(['title', 'id', 'desc'])->latest()->get();
             return response()->json([
                 'status' => 'success',
                 'reports' => $reports,
