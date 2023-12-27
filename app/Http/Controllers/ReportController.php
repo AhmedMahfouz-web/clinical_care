@@ -123,17 +123,17 @@ class ReportController extends Controller
         ]);
     }
 
-    public function get_report(Report $report)
+    public function get_report(Report $report_id)
     {
 
         if (auth()->user() != null) {
             // if (auth()->user()->id == $report->user_id) {
 
-            $reports = $report->with(['files', 'user', 'doctor'])->get();
+            $report = Report::where('id', $report_id)->with(['files', 'user', 'doctor'])->first();
 
             return response()->json([
                 'status' => 'success',
-                'report' => $reports,
+                'report' => $report,
             ]);
             // }
         } else {
