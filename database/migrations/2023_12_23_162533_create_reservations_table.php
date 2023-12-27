@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('hospital_id')->references('id')->on('hospitals')->onDelete('cascade');
             $table->foreignId('test_id')->references('id')->on('tests')->onDelete('cascade');
             $table->timestamp('date')->nullable();
-            $table->string('status')->default('pending');
+            $table->string('status')->default('انتظار');
             $table->string('transaction');
             $table->timestamps();
         });

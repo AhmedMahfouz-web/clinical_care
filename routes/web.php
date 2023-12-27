@@ -8,6 +8,7 @@ use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,9 +87,14 @@ Route::group(['prefix' => 'dashboard'], function ($router) {
                 Route::get('/show/{report}', 'show_dashboard')->name('show one report');
                 Route::post('/assign_doctor/{report}', 'assign_doctor')->name('assign doctor');
                 Route::get('/show_answered/{report}', 'show_answered_dashboard')->name('show answered report');
-                // Route::get('/edit_hospital/{hospital}', 'edit')->name('edit hospital');
-                // Route::post('/update_hospital/{hospital}', 'update')->name('update hospital');
-                // Route::post('/delete_hospital/{hospital}', 'destroy')->name('delete hospital');
+            });
+        });
+
+        Route::group(['prefix' => 'reservation'], function ($router) {
+            Route::group(['controller' => ReservationController::class], function () {
+                Route::get('/', 'index')->name('show reservations');
+                Route::get('/show/{reservation}', 'show_reserved_dashboard')->name('show one reservation');
+                Route::post('/reserve/{report}', 'reserve')->name('reserve');
             });
         });
 

@@ -21,6 +21,15 @@ class HospitalController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'phone' => 'required|numric|max:255',
+            'bio' => 'required|string|max:255',
+        ]);
+
         Hospital::create([
             'name' => $request->name,
             'type' => $request->type,

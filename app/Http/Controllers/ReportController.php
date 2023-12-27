@@ -81,13 +81,7 @@ class ReportController extends Controller
         return view('pages.reports.show', compact(['report', 'doctors']));
     }
 
-    public function show_answered_dashboard($report)
-    {
-        $report->load(['doctor', 'user', 'files']);
-        return view('pages.reports.show_answered', compact('report'));
-    }
-
-    public function assign_doctor(Request $request, Report $report)
+    public function change_status(Request $request, Report $report)
     {
         $report->update([
             'doctor_id' => $request->doctor_id
@@ -95,6 +89,8 @@ class ReportController extends Controller
 
         $notification = Notification::create([
             'receiver_id' => $request->doctor_id,
+            'model' => 'report',
+            'model_id' => $report->id,
             'body' => 'تم الحاقك لعمل تقرير جديد لاحد المرضي ',
         ]);
 
@@ -158,6 +154,8 @@ class ReportController extends Controller
 
             $notification = Notification::create([
                 'receiver_id' => $report->user_id,
+                'model' => 'report',
+                'model_id' => $report->id,
                 'body' => 'تم الرد علي طلب التقرير الخاص بك ',
             ]);
 

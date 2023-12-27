@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('receiver_id');
             $table->string('body');
+            $table->string('model');
+            $table->unsignedBigInteger('model_id');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

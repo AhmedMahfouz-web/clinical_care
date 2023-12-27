@@ -13,7 +13,7 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::where('status', 'pending')->with('user')->latest()->get();
+        $reservations = Reservation::with(['user', 'hospital', 'test'])->latest()->get();
         return view('pages.reservations.index', compact('reservations'));
     }
 
@@ -57,53 +57,38 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function show_answered_dashboard(Reservation $reservation)
+    public function show_reserved_dashboard(Reservation $reservation)
     {
-        $reservation = $reservation->with('user', 'doctor')->first();
+        $reservation->load('user', 'hospital', 'test');
         return view('pages.reservations.show_answered', compact('reservation'));
     }
 
     public function reserve(Request $request, Reservation $reservation)
     {
-        $reservation->update([
-            'doctor_id' => $request->doctor_id
-        ]);
-
-        $notification = Notification::create([
-            'receiver_id' => $request->doctor_id,
-            'body' => 'تم الحاقك لعمل تقرير جديد لاحد المرضي ',
-        ]);
-
-
-        return redirect()->route('show reservations');
-    }
-
-    public function get_reservation(reservation $reservation)
-    {
-        if (auth()->guard('doctor')->user()->id == $reservation->doctor_id || auth()->user()->id == $reservation->user_id) {
-            return response()->json([
-                'status' => 'success',
-                'reservation' => $reservation->with(['files', 'user']),
-            ]);
-        }
-    }
-
-    public function answer(Request $request, reservation $reservation)
-    {
-        if (auth()->guard('doctor')->user()->id == $reservation->doctor_id) {
+        if ($reservation->status != $request->status) {
             $reservation->update([
-                'doctor_comment', $request->answer
+                'status' => $request->status
             ]);
 
             $notification = Notification::create([
                 'receiver_id' => $reservation->user_id,
-                'body' => 'تم الرد علي طلب التقرير الخاص بك ',
+                'model' => 'reservation',
+                'model_id' => $reservation->id,
+                'body' => 'تم تغيير حالة طلب اجراء الفحوصات الخاص بك الي ' . $reservation->status,
             ]);
         }
 
+        return redirect()->route('show reservations');
+    }
 
-        return response()->json([
-            'status' => 'success',
-        ]);
+    public function get_reservation(Reservation $reservation)
+    {
+        if (auth()->user()->id == $reservation->user_id) {
+            $reservation->load(['user', 'hospital', 'tests']);
+            return response()->json([
+                'status' => 'success',
+                'reservation' => $reservation,
+            ]);
+        }
     }
 }

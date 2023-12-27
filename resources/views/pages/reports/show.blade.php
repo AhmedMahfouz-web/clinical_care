@@ -46,7 +46,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-6">
-                                <h6 class="text-muted">هل قام بعم احدي العمليات من قبل: </h6>
+                                <h6 class="text-muted">هل قام بعمل احدي العمليات من قبل: </h6>
                                 <h6>{{ $report->surgery }}</h6>
                             </div>
                             <div class="col-md-6">

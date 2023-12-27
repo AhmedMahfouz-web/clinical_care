@@ -26,6 +26,15 @@
                     <li><a href="{{ route('show answered reports') }}">عرض التقارير </a></li>
                 </ul>
             </li>
+            <li {{ Request::is('dashboard/reservation/*', 'dashboard/reservation') ? 'class=active' : '' }}>
+                <a href="{{ route('show reservations') }}" class="has-arrow"><i class="ti-user "></i><span>حجوزات الاشعة
+                        و التحاليل</span>
+                </a>
+                {{-- <ul>
+                    <li><a href="{{ route('show reports') }}">عرض حجوزات الاشعة و
+                            التحاليل</a></li>
+                </ul> --}}
+            </li>
             <li {{ Request::is('dashboard/hospital/*', 'dashboard/hospital') ? 'class=active' : '' }}>
                 <a href="javascript:void(0)" class="has-arrow"><i class="ti-user "></i><span>المستشفيات و المعامل</span>
                 </a>
