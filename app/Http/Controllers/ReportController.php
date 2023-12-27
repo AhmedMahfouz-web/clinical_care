@@ -129,7 +129,7 @@ class ReportController extends Controller
         if (auth()->user() != null) {
             if (auth()->user()->id == $report->user_id) {
 
-                $reports = Report::where('id', $report)->with(['files', 'user', 'doctor'])->first();
+                $reports = Report::where('id', $report)->with(['files', 'user', 'doctor'])->get();
 
                 return response()->json([
                     'status' => 'success',
