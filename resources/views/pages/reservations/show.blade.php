@@ -38,7 +38,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h6 class="text-muted">اسم المشفي او المعمل : </h6>
-                                    <h6>{{ $report->hospital->name }}</h6>
+                                    <h6>{{ $reservation->hospital->name }}</h6>
                                 </div>
                                 <div class="col-md-6">
                                     <h6 class="text-muted">الوقت: </h6>
