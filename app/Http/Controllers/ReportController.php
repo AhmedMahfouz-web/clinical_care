@@ -81,7 +81,7 @@ class ReportController extends Controller
         return view('pages.reports.show', compact(['report', 'doctors']));
     }
 
-    public function change_status(Request $request, Report $report)
+    public function assign_doctor(Request $request, Report $report)
     {
         $report->update([
             'doctor_id' => $request->doctor_id
