@@ -68,16 +68,19 @@ Route::get('notifications/{notification}', [NotificationsController::class, 'rea
 
 Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {
     Route::get('/{doctor}', 'show_doctor');
-    Route::get('/doctor/profile', 'profile');
-    Route::get('/edit', 'edit_doctor');
-    Route::put('/update/{doctor}', 'update_doctor');
-    Route::delete('/destroy/{doctor}', 'destroy_doctor');
     Route::get('/', 'show_all_doctors');
     Route::get('/home', 'show_all_doctors_home');
 });
 
 Route::middleware(['auth:doctor'])->group(function () {
     Route::post('/report/{report}/answer', [ReportController::class, 'answer']);
+
+    Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {
+        Route::get('/doctor/profile', 'profile');
+        Route::get('/edit', 'edit_doctor');
+        Route::put('/update/{doctor}', 'update_doctor');
+        Route::delete('/destroy/{doctor}', 'destroy_doctor');
+    });
 });
 
 Route::get('get_professions', [ProfessionController::class, 'index_api']);
