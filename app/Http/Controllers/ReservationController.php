@@ -60,7 +60,7 @@ class ReservationController extends Controller
     public function show_reserved_dashboard(Reservation $reservation)
     {
         $reservation->load('user', 'hospital', 'test');
-        return view('pages.reservations.show_answered', compact('reservation'));
+        return view('pages.reservations.show', compact('reservation'));
     }
 
     public function reserve(Request $request, Reservation $reservation)
