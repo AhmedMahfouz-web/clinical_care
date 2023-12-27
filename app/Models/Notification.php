@@ -12,6 +12,8 @@ class Notification extends Model
     protected $fillable = [
         'receiver_id',
         'body',
+        'model',
+        'model_id',
         'read_at',
     ];
 }
