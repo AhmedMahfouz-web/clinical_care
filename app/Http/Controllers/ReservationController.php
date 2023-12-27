@@ -13,7 +13,7 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::with(['user', 'hospital', 'test'])->latest()->get();
+        $reservations = Reservation::with(['user', 'hospital', 'test'])->latest()->all();
         return view('pages.reservations.index', compact('reservations'));
     }
 
