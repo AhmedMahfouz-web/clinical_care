@@ -43,7 +43,7 @@
                                 <div class="col-md-6">
                                     <h6 class="text-muted">الوقت: </h6>
                                     <input type="date" min="{{ today() }}"
-                                        value="{{ $reservation->date == null ? '' : $reservation->date }}">
+                                        value="{{ $reservation->date == null ? today() : $reservation->date }}">
                                 </div>
                             </div>
                             <hr>
