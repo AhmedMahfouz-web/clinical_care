@@ -62,6 +62,9 @@ class DoctorController extends Controller
     public function update_doctor(doctor $doctor, Request $request)
     {
 
+        return response()->json([
+            'request' => $request
+        ]);
         // Validate input
         $request->validate([
             'first_name' => 'required|string|max:255',
