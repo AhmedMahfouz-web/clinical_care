@@ -58,7 +58,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::get('create', 'create');
         Route::post('store', 'store');
         Route::get('my_reservations/{report}', 'get_reservation');
-        Route::get('my_reservations', 'get_reservations');
+        Route::get('my_reservations', 'get_all_reservations');
     });
     Route::get('doctor/search/{name}&{profession}', [DoctorController::class, 'search'])->name('search_doctors');
 });

@@ -92,4 +92,13 @@ class ReservationController extends Controller
             ]);
         }
     }
+
+    public function get_all_reservation()
+    {
+        $reservation = Reservation::where('user_id', auth()->user()->id)->with(['user', 'hospital', 'tests'])->get();
+        return response()->json([
+            'status' => 'success',
+            'reservation' => $reservation,
+        ]);
+    }
 }
