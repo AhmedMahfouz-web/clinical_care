@@ -6,6 +6,8 @@ use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationApiController;
 use Illuminate\Http\Request;
@@ -51,6 +53,13 @@ Route::group(['middleware' => 'api'], function () {
         Route::get('my_reports/{report}', 'get_report');
         Route::get('my_reports', 'get_all_reports');
     });
+
+    Route::group(['prefix' => 'reservation', 'controller' => ReservationController::class], function ($router) {
+        Route::get('create', 'create');
+        Route::post('store', 'store');
+        Route::get('my_reservations/{report}', 'get_reservation');
+        Route::get('my_reservations', 'get_all_reservations');
+    });
     Route::get('doctor/search/{name}&{profession}', [DoctorController::class, 'search'])->name('search_doctors');
 });
 
@@ -66,8 +75,7 @@ Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], fu
     Route::delete('/destroy/{doctor}', 'destroy_doctor');
 });
 
-Route::middleware(['auth:doctor'])->group(function () {
-    // Route::get('/report/{report}', [ReportController::class, 'get_report']);                                        
+Route::middleware(['auth:doctor'])->group(function () {                                  
     Route::post('/report/{report}/answer', [ReportController::class, 'answer']);
 });
 
