@@ -137,6 +137,7 @@ class ReportController extends Controller
         } else {
             return response()->json([
                 'id' => auth()->guard('doctor')->user()->id,
+                'report_id' => $report->id
             ]);
             if (auth()->guard('doctor')->user()->id == $report->doctor_id) {
                 $report->load(['files', 'user', 'doctor']);
