@@ -39,7 +39,7 @@ class DoctorController extends Controller
 
     public function profile()
     {
-        $doctor = Doctor::where('id', auth()->guard('doctor')->user()->id)->with('profession')->first();
+        $doctor = Doctor::where('id', auth()->guard('doctor')->user()->id)->first();
         return response()->json([
             'message' => 'success',
             'doctor' => $doctor
