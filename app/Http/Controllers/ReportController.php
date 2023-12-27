@@ -76,14 +76,14 @@ class ReportController extends Controller
 
     public function show_dashboard(Report $report)
     {
-        $report = $report->with(['files', 'user'])->first();
+        $report->load(['doctor', 'user', 'files']);
         $doctors = Doctor::where('profession', $report->profession)->get();
         return view('pages.reports.show', compact(['report', 'doctors']));
     }
 
-    public function show_answered_dashboard(Report $report)
+    public function show_answered_dashboard($report)
     {
-        $report = $report->with(['files', 'user', 'doctor'])->first();
+        $report->load(['doctor', 'user', 'files']);
         return view('pages.reports.show_answered', compact('report'));
     }
 
@@ -123,11 +123,11 @@ class ReportController extends Controller
         ]);
     }
 
-    public function get_report($report_id)
+    public function get_report(Report $report)
     {
-        $report = Report::where('id', $report_id)->with(['files', 'user', 'doctor'])->first();
         if (auth()->user() != null) {
             if (auth()->user()->id == $report->user_id) {
+                $report->load(['files', 'user', 'doctor']);
 
                 return response()->json([
                     'status' => 'success',
@@ -136,7 +136,7 @@ class ReportController extends Controller
             }
         } else {
             if (auth()->guard('doctor')->user()->id == $report->doctor_id) {
-
+                $report->load(['files', 'user', 'doctor']);
 
                 return response()->json([
                     'status' => 'success',
