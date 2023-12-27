@@ -39,9 +39,9 @@ class DoctorController extends Controller
 
     public function profile()
     {
-        $doctor = Doctor::where('id', auth()->guard('doctor')->user()->id)->first();
+        $doctor = auth()->guard('doctor')->user();
         return response()->json([
-            'message' => 'success',
+            'status' => 'success',
             'doctor' => $doctor
         ]);
     }
@@ -49,7 +49,7 @@ class DoctorController extends Controller
     // Edit doctor profile
     public function edit_doctor()
     {
-        $doctor = Doctor::where('id', auth()->guard('doctor')->user()->id)->first();
+        $doctor = auth()->guard('doctor')->user();
         $professions = Profession::all();
         return response()->json([
             'message' => 'success',
@@ -71,16 +71,16 @@ class DoctorController extends Controller
             'work_at' => 'required|string|max:255',
             'profession' => 'required',
         ]);
-
-        // Update doctor
-        $doctor->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'bio' => $request->bio,
-            'phone' => $request->phone,
-            'work_at' => $request->work_at,
-            'profession' => $request->profession
-        ]);
+        if ($doctor->id == auth()->guard('doctor')->user()->id)
+            // Update doctor
+            $doctor->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'bio' => $request->bio,
+                'phone' => $request->phone,
+                'work_at' => $request->work_at,
+                'profession' => $request->profession
+            ]);
 
         return response()->json([
             'status' => 'success',
