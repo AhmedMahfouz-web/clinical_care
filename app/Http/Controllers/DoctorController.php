@@ -37,13 +37,24 @@ class DoctorController extends Controller
         ]);
     }
 
-    // Edit doctor profile
-    public function edit_doctor(Doctor $doctor)
+    public function profile()
     {
-
+        $doctor = Doctor::where('id', auth()->guard('doctor')->user()->id)->with('profession')->first();
         return response()->json([
             'message' => 'success',
-            'doctor' => $doctor->with('profession'),
+            'doctor' => $doctor
+        ]);
+    }
+
+    // Edit doctor profile
+    public function edit_doctor()
+    {
+        $doctor = Doctor::where('id', auth()->guard('doctor')->user()->id)->first();
+        $professions = Profession::all();
+        return response()->json([
+            'message' => 'success',
+            'doctor' => $doctor,
+            'professions' => $professions,
         ]);
     }
 
@@ -74,7 +85,7 @@ class DoctorController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'doctor profile updated successfully',
-            'doctor' => $doctor->with('profession'),
+            'doctor' => $doctor,
         ]);
     }
 

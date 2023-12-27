@@ -58,7 +58,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::get('create', 'create');
         Route::post('store', 'store');
         Route::get('my_reservations/{report}', 'get_reservation');
-        Route::get('my_reservations', 'get_all_reservations');
+        Route::get('my_reservations', 'get_reservations');
     });
     Route::get('doctor/search/{name}&{profession}', [DoctorController::class, 'search'])->name('search_doctors');
 });
@@ -70,12 +70,13 @@ Route::get('notifications/{notification}', [NotificationsController::class, 'rea
 
 Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {
     Route::get('/{doctor}', 'show_doctor');
+    Route::get('/doctor/profie', 'profile');
     Route::get('/edit/{doctor}', 'edit_doctor');
     Route::put('/update/{doctor}', 'update_doctor');
     Route::delete('/destroy/{doctor}', 'destroy_doctor');
 });
 
-Route::middleware(['auth:doctor'])->group(function () {                                  
+Route::middleware(['auth:doctor'])->group(function () {
     Route::post('/report/{report}/answer', [ReportController::class, 'answer']);
 });
 
