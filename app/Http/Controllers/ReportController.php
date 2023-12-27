@@ -133,7 +133,7 @@ class ReportController extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'report' => $report->with(['files', 'user', 'doctor']),
+                    'report' => $report->with(['files', 'user', 'doctor'])->first(),
                 ]);
             }
         } else {
