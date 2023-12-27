@@ -83,7 +83,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h6 class="text-muted">اثبات التحويل :</h6>
-                                <img style="width: 300px" src="{{ asset($report->transaction) }}" alt="">
+                                <img style="width: 300px" src="{{ asset('images/' . $report->transaction) }}"
+                                    alt="">
                             </div>
                         </div>
                         <hr>
