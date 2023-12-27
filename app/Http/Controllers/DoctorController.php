@@ -71,7 +71,7 @@ class DoctorController extends Controller
             'work_at' => 'required|string|max:255',
             'profession' => 'required',
         ]);
-        if ($doctor->id == auth()->guard('doctor')->user()->id)
+        if ($doctor->id == auth()->guard('doctor')->user()->id) {
             // Update doctor
             $doctor->update([
                 'first_name' => $request->first_name,
@@ -81,6 +81,7 @@ class DoctorController extends Controller
                 'work_at' => $request->work_at,
                 'profession' => $request->profession
             ]);
+        }
 
         return response()->json([
             'status' => 'success',
