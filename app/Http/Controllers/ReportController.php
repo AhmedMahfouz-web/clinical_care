@@ -144,6 +144,9 @@ class ReportController extends Controller
                 ]);
             }
         }
+        return response()->json([
+            'status' => 'error'
+        ]);
     }
 
     public function answer(Request $request, Report $report)
