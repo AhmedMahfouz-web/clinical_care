@@ -69,7 +69,7 @@ Route::get('notifications/{notification}', [NotificationsController::class, 'rea
 Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {
     Route::get('/{doctor}', 'show_doctor');
     Route::get('/doctor/profile', 'profile');
-    Route::get('/edit/{doctor}', 'edit_doctor');
+    Route::get('/edit', 'edit_doctor');
     Route::put('/update/{doctor}', 'update_doctor');
     Route::delete('/destroy/{doctor}', 'destroy_doctor');
     Route::get('/', 'show_all_doctors');
