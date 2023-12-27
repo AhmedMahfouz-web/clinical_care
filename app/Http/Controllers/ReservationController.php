@@ -85,7 +85,7 @@ class ReservationController extends Controller
     public function get_reservation(Reservation $reservation)
     {
         if (auth()->user()->id == $reservation->user_id) {
-            $reservation->load(['user', 'hospital', 'tests']);
+            $reservation->load(['user', 'hospital', 'test']);
             return response()->json([
                 'status' => 'success',
                 'reservation' => $reservation,
@@ -95,7 +95,7 @@ class ReservationController extends Controller
 
     public function get_all_reservations()
     {
-        $reservation = Reservation::where('user_id', auth()->user()->id)->with(['user', 'hospital', 'tests'])->get();
+        $reservation = Reservation::where('user_id', auth()->user()->id)->with(['user', 'hospital', 'test'])->get();
         return response()->json([
             'status' => 'success',
             'reservation' => $reservation,
