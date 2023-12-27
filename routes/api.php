@@ -48,7 +48,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'report', 'controller' => ReportController::class], function ($router) {
         Route::get('create', 'create');
         Route::post('store', 'store');
-        Route::get('my_reports/{report_id}', 'get_report');
+        Route::get('my_reports/{report}', 'get_report');
         Route::get('my_reports', 'get_all_reports');
     });
     Route::get('doctor/search/{name}&{profession}', [DoctorController::class, 'search'])->name('search_doctors');
