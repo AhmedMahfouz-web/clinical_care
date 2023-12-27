@@ -27,11 +27,12 @@ class ReservationController extends Controller
     public function create()
     {
         $hospitals = Hospital::all();
-        $test = Test::all();
+        $tests = Test::all();
 
         return response()->json([
             'status' => 'success',
-            'professions' => $hospitals
+            'hospitals' => $hospitals,
+            'tests' => $tests,
         ]);
     }
 
@@ -43,16 +44,11 @@ class ReservationController extends Controller
             $request->transaction->move(public_path('images/transaction'), $transaction_name);
         }
 
-        $reservation = reservation::create([
-            'title' => $request->title,
-            'desc' => $request->desc,
-            'profession' => $request->profession,
-            'family_related' => $request->family_related,
-            'sleep_on_hospital' => $request->sleep_on_hospital,
-            'surgery' => $request->surgery,
-            'notes' => $request->notes,
+        $reservation = Reservation::create([
+            'user_id' => auth()->user()->id,
+            'hospital_id' => $request->hospital_id,
+            'test_id' => $request->test_id,
             'transaction' => $transaction_name,
-            'user_id' => auth()->user()->id
         ]);
 
 
@@ -61,19 +57,13 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function show_dashboard(reservation $reservation)
+    public function show_answered_dashboard(Reservation $reservation)
     {
-        $reservation = $reservation->with(['files', 'user'])->first();
-        return view('pages.reservations.show', compact(['reservation']));
-    }
-
-    public function show_answered_dashboard(reservation $reservation)
-    {
-        $reservation = $reservation->with(['files', 'user', 'doctor'])->first();
+        $reservation = $reservation->with('user', 'doctor')->first();
         return view('pages.reservations.show_answered', compact('reservation'));
     }
 
-    public function assign_doctor(Request $request, reservation $reservation)
+    public function reserve(Request $request, Reservation $reservation)
     {
         $reservation->update([
             'doctor_id' => $request->doctor_id

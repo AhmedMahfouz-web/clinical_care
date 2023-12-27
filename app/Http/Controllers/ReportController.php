@@ -129,21 +129,21 @@ class ReportController extends Controller
         if (auth()->user() != null) {
             if (auth()->user()->id == $report->user_id) {
 
-                $report = $report->with(['files', 'user', 'doctor'])->first();
+                $reports = $report->with(['files', 'user', 'doctor'])->first();
 
                 return response()->json([
                     'status' => 'success',
-                    'report' => $report,
+                    'report' => $reports,
                 ]);
             }
         } else {
             if (auth()->guard('doctor')->user()->id == $report->doctor_id) {
 
-                $report = $report->with(['files', 'user', 'doctor'])->first();
+                $reports = $report->with(['files', 'user', 'doctor'])->first();
 
                 return response()->json([
                     'status' => 'success',
-                    'report' => $report,
+                    'report' => $reports,
                 ]);
             }
         }

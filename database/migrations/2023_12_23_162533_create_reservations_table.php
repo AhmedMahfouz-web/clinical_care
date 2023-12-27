@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('hospital_id')->references('id')->on('hospitals')->onDelete('cascade');
+            $table->foreignId('test_id')->references('id')->on('tests')->onDelete('cascade');
+            $table->timestamp('date')->nullable();
+            $table->string('status')->default('pending');
+            $table->string('transaction');
             $table->timestamps();
         });
     }
