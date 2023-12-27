@@ -129,7 +129,7 @@ class ReportController extends Controller
         if (auth()->user() != null) {
             // if (auth()->user()->id == $report->user_id) {
 
-            $report = $report_id->$this->with(['files', 'user', 'doctor']);
+            $report = $this->with(['files', 'user', 'doctor']);
 
             return response()->json([
                 'status' => 'success',
