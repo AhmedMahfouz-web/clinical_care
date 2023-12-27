@@ -123,7 +123,7 @@ class ReportController extends Controller
         ]);
     }
 
-    public function get_report(Report $report_id)
+    public function get_report($report_id)
     {
 
         if (auth()->user() != null) {
