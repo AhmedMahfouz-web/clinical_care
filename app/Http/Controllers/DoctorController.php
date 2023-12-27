@@ -39,10 +39,9 @@ class DoctorController extends Controller
 
     public function profile()
     {
-        $doctor = Doctor::first();
         return response()->json([
             'status' => 'success',
-            'doctor' => $doctor
+            'doctor' => 'Hello I\'m under the water'
         ]);
     }
 
