@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('desc', 2550);
+            $table->string('desc', 255000);
             $table->string('profession');
             $table->string('family_related');
             $table->string('sleep_on_hospital');
             $table->string('surgery');
             $table->string('notes')->nullable();
             $table->foreignUuid('doctor_id')->nullable()->references('id')->on('doctors')->onDelete('cascade');
-            $table->string('doctor_comment')->nullable();
+            $table->string('doctor_comment', 255000)->nullable();
             $table->string('transaction');
             $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
