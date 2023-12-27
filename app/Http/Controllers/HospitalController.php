@@ -26,7 +26,7 @@ class HospitalController extends Controller
             'type' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'phone' => 'required|numric|max:255',
+            'phone' => 'required|numeric|max:255',
             'bio' => 'required|string|max:255',
         ]);
 
