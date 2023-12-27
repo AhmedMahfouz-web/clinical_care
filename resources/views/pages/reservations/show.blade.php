@@ -65,13 +65,6 @@
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h6 class="text-muted">التخصص: </h6>
-                                    <h6>{{ $report->profession }}</h6>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-6">
                                     <h6 class="text-muted">اثبات التحويل :</h6>
                                     <img style="width: 300px"
                                         src="{{ asset('images/transaction/' . $reservation->transaction) }}"
