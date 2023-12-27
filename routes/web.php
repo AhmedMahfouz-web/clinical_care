@@ -94,7 +94,7 @@ Route::group(['prefix' => 'dashboard'], function ($router) {
             Route::group(['controller' => ReservationController::class], function () {
                 Route::get('/', 'index')->name('show reservations');
                 Route::get('/show/{reservation}', 'show_reserved_dashboard')->name('show one reservation');
-                Route::post('/reserve/{report}', 'reserve')->name('reserve');
+                Route::post('/reserve/{reservation}', 'reserve')->name('reserve');
             });
         });
 

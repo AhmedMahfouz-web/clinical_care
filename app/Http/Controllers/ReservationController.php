@@ -66,16 +66,16 @@ class ReservationController extends Controller
     public function reserve(Request $request, Reservation $reservation)
     {
         if ($reservation->status != $request->status) {
+            $reservation->update([
+                'status' => $request->status,
+                'date' => $request->date
+            ]);
 
             $notification = Notification::create([
                 'receiver_id' => $reservation->user_id,
                 'model' => 'reservation',
                 'model_id' => $reservation->id,
                 'body' => 'تم تغيير حالة طلب اجراء الفحوصات الخاص بك الي ' . $reservation->status,
-            ]);
-
-            $reservation->update([
-                'status' => $request->status
             ]);
         }
 
