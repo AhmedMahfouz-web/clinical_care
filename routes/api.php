@@ -65,7 +65,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {
         Route::get('/doctor/profile', 'profile');
         Route::get('/edit', 'edit_doctor');
-        Route::put('/update/{doctor}', 'update_doctor');
+        Route::post('/update/{doctor}', 'update_doctor');
         Route::delete('/destroy/{doctor}', 'destroy_doctor');
     });
 });
