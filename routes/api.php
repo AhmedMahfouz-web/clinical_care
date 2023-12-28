@@ -86,3 +86,5 @@ Route::middleware(['auth:doctor'])->group(function () {
 
 Route::get('get_professions', [ProfessionController::class, 'index_api']);
 Route::get('get_partners', [PartnerController::class, 'index_api']);
+
+Route::get('/token', [MeetingController::class, 'start_meeting']);
