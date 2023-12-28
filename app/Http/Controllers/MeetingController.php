@@ -65,7 +65,7 @@ class MeetingController extends Controller
         return redirect()->route('show meetings');
     }
 
-    public function start_meeting($request)
+    public function start_meeting()
     {
         $jitsi_server_url = config("app.jitsi_url");
         $jitsi_jwt_token_secret = config("app.jwt_secret");
