@@ -70,7 +70,7 @@ class DoctorController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'bio' => 'required|string',
-            'phone' => 'required|numeric|max:255',
+            'phone' => 'required|numeric',
             'work_at' => 'required|string|max:255',
             'profession' => 'required',
         ]);

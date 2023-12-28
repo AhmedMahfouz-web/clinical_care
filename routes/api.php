@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
@@ -84,3 +85,4 @@ Route::middleware(['auth:doctor'])->group(function () {
 });
 
 Route::get('get_professions', [ProfessionController::class, 'index_api']);
+Route::get('get_partners', [PartnerController::class, 'index_api']);

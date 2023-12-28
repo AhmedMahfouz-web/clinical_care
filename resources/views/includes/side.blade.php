@@ -59,6 +59,14 @@
                     <li><a href="{{ route('create profession') }}">اضافة تخصص</a></li>
                 </ul>
             </li>
+            <li {{ Request::is('dashboard/partner/*', 'dashboard/partner') ? 'class=active' : '' }}>
+                <a href="javascript:void(0)" class="has-arrow"><i class="ti-user "></i><span>الشركاء</span>
+                </a>
+                <ul>
+                    <li><a href="{{ route('show partners') }}">عرض الشركاء</a></li>
+                    <li><a href="{{ route('create partner') }}">اضافة شريك</a></li>
+                </ul>
+            </li>
             @if (auth()->guard('admin')->user()->role == 'صاحب منشأة')
                 <li {{ Request::is('dashboard/admin/*', 'dashboard/admin') ? 'class=active' : '' }}>
                     <a href="javascript:void(0)" class="has-arrow"><i class="ti-user "></i><span>الاداريون</span>

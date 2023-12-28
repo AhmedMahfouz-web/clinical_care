@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
@@ -55,6 +56,17 @@ Route::group(['prefix' => 'dashboard'], function ($router) {
                 Route::get('/edit_profession/{profession}', 'edit')->name('edit profession');
                 Route::post('/update_profession/{profession}', 'update')->name('update profession');
                 Route::post('/delete_profession/{profession}', 'destroy')->name('delete profession');
+            });
+        });
+
+        Route::group(['prefix' => 'partner'], function ($router) {
+            Route::group(['controller' => PartnerController::class], function () {
+                Route::get('/', 'index')->name('show partners');
+                Route::get('/create_partner', 'create')->name('create partner');
+                Route::post('/store_partner', 'store')->name('store partner');
+                Route::get('/edit_partner/{partner}', 'edit')->name('edit partner');
+                Route::post('/update_partner/{partner}', 'update')->name('update partner');
+                Route::post('/delete_partner/{partner}', 'destroy')->name('delete partner');
             });
         });
 

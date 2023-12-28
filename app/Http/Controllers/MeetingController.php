@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Meeting;
 use App\Notifications\MeetingScheduled;
+use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
+
 
 class MeetingController extends Controller
 {
@@ -61,5 +63,41 @@ class MeetingController extends Controller
         ]);
 
         return redirect()->route('show meetings');
+    }
+
+    public function start_meeting($request)
+    {
+        $jitsi_server_url = config("app.jitsi_url");
+        $jitsi_jwt_token_secret = config("app.jwt_secret");
+
+        $payload = array(
+            "aud" => "jitsi",
+            "iss" => "chat",
+            "exp" => time() + 7200,
+            "nbf" => time() - 0,
+            "sub" => "vpaas-magic-cookie-7d479d683caa4989be5d801ba84dd349",
+            "context" => [
+                "features" => [
+                    "livestreaming" => true,
+                    "outbound-call" => true,
+                    "sip-outbound-call" => false,
+                    "transcription" => true,
+                    "recording" => true
+                ],
+                "user" => [
+                    "hidden-from-recorder" => false,
+                    "moderator" => true,
+                    "name" => auth()->user()->fist_name,
+                    "avatar" => "",
+                ]
+            ],
+            "room" => "hello"
+        );
+
+        $token = JWT::encode($payload, $jitsi_jwt_token_secret, "RS256");
+
+        return response()->json([
+            'token' => $token
+        ]);
     }
 }
