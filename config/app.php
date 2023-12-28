@@ -15,6 +15,8 @@ return [
     | any other location as required by the application or its packages.
     |
     */
+    'jitsi_url' => '8x8.vc',
+    'jwt_secret' => 'vpaas-magic-cookie-7d479d683caa4989be5d801ba84dd349/0ad784',
 
     'name' => env('APP_NAME', 'Laravel'),
 
