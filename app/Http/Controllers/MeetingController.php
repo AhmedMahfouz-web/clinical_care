@@ -87,7 +87,7 @@ class MeetingController extends Controller
                 "user" => [
                     "hidden-from-recorder" => false,
                     "moderator" => true,
-                    "name" => auth()->user()->fist_name,
+                    "name" => "Ahmed",
                     "avatar" => "",
                 ]
             ],
