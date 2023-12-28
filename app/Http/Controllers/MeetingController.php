@@ -65,7 +65,7 @@ class MeetingController extends Controller
         return redirect()->route('show meetings');
     }
 
-    public function start_meeting()
+    public function start_meeting(Request $request, $type)
     {
         $jitsi_server_url = config("app.jitsi_url");
         $jitsi_jwt_token_secret = '-----BEGIN RSA PRIVATE KEY-----
@@ -121,12 +121,19 @@ zJZb9X1DqKVoGplvaLJaR7Eij7XlWsoBn3Gj/aAuKsPxhGnUcnulh0xLdSk=
 -----END RSA PRIVATE KEY-----';
         $private_key = 'vpaas-magic-cookie-7d479d683caa4989be5d801ba84dd349/71fdaa';
 
+        if ($type = 'doctor') {
+            $user = auth()->guard('doctor')->user()->first_name . ' ' . auth()->guard('doctor')->user()->last_name;
+        } else {
+            $user = auth()->user()->first_name . ' ' . auth()->user()->last_name;
+        }
+
         $payload = array(
             "aud" => "jitsi",
             "iss" => "chat",
             "exp" => time() + 7200,
             "nbf" => time() - 0,
             "sub" => "vpaas-magic-cookie-7d479d683caa4989be5d801ba84dd349/71fdaa",
+            'room' => $request->meeting_id,
             "context" => [
                 "features" => [
                     "livestreaming" => true,
@@ -137,12 +144,11 @@ zJZb9X1DqKVoGplvaLJaR7Eij7XlWsoBn3Gj/aAuKsPxhGnUcnulh0xLdSk=
                 ],
                 "user" => [
                     "hidden-from-recorder" => false,
-                    "moderator" => true,
-                    "name" => "Ahmed",
+                    "moderator" => false,
+                    "name" => $user,
                     "avatar" => "",
                 ]
-            ],
-            "room" => "hello"
+            ]
         );
 
         $token = JWT::encode($payload, $jitsi_jwt_token_secret, "RS256", $private_key);
