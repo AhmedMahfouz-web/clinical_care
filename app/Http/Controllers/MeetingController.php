@@ -65,7 +65,7 @@ class MeetingController extends Controller
         return redirect()->route('show meetings');
     }
 
-    public function start_meeting(Request $request, $type)
+    public function start_meeting($meeting_id, $type)
     {
         $jitsi_server_url = config("app.jitsi_url");
         $jitsi_jwt_token_secret = '-----BEGIN RSA PRIVATE KEY-----
@@ -121,7 +121,7 @@ zJZb9X1DqKVoGplvaLJaR7Eij7XlWsoBn3Gj/aAuKsPxhGnUcnulh0xLdSk=
 -----END RSA PRIVATE KEY-----';
         $private_key = 'vpaas-magic-cookie-7d479d683caa4989be5d801ba84dd349/71fdaa';
 
-        if ($type = 'doctor') {
+        if ($type == 'doctor') {
             $user = auth()->guard('doctor')->user()->first_name . ' ' . auth()->guard('doctor')->user()->last_name;
         } else {
             $user = auth()->user()->first_name . ' ' . auth()->user()->last_name;
@@ -133,7 +133,7 @@ zJZb9X1DqKVoGplvaLJaR7Eij7XlWsoBn3Gj/aAuKsPxhGnUcnulh0xLdSk=
             "exp" => time() + 7200,
             "nbf" => time() - 0,
             "sub" => "vpaas-magic-cookie-7d479d683caa4989be5d801ba84dd349/71fdaa",
-            'room' => $request->meeting_id,
+            'room' => $meeting_id,
             "context" => [
                 "features" => [
                     "livestreaming" => true,
