@@ -218,8 +218,8 @@ zJZb9X1DqKVoGplvaLJaR7Eij7XlWsoBn3Gj/aAuKsPxhGnUcnulh0xLdSk=
                 ],
                 "user" => [
                     "hidden-from-recorder" => false,
-                    "moderator" => false,
-                    // "name" => $user,
+                    "moderator" => true,
+                    "name" => 'Samir',
                     "avatar" => "",
                 ]
             ]
