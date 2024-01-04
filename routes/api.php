@@ -72,6 +72,8 @@ Route::group(['middleware' => 'api'], function () {
     });
 });
 
+Route::get('access_token', [AccessTokenController::class, 'generate_token']);
+
 Route::get('notifications', [NotificationsController::class, 'get_notification']);
 Route::get('notifications/{notification}', [NotificationsController::class, 'read_notification']);
 
@@ -89,5 +91,3 @@ Route::get('get_professions', [ProfessionController::class, 'index_api']);
 Route::get('get_partners', [PartnerController::class, 'index_api']);
 
 Route::get('/token', [MeetingController::class, 'start_meeting']);
-
-Route::get('/access_token', [AccessTokenController::class, 'generate_token']);
