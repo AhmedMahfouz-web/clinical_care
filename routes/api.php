@@ -90,4 +90,4 @@ Route::get('get_partners', [PartnerController::class, 'index_api']);
 
 Route::get('/token', [MeetingController::class, 'start_meeting']);
 
-Route::get('access_token', [AccessTokenController::class, 'generate_token']);
+Route::get('/access_token', [AccessTokenController::class, 'generate_token']);
