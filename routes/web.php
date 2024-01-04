@@ -4,6 +4,7 @@ use App\Events\MeetingScheduled;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\PartnerController;
@@ -31,9 +32,7 @@ Route::group(['prefix' => 'dashboard'], function ($router) {
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
 
     Route::group(['middleware' => 'adminauth:admin'], function () {
-        Route::get('/', function () {
-            return view('layouts.dashboard');
-        })->name('dashboard');
+        Route::get('/', [Controller::class, 'index'])->name('dashboard');
 
         Route::post('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
 

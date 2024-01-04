@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.8",
         "predis/predis": "^2.2",
         "pusher/pusher-php-server": "^7.2",
+        "twilio/sdk": "^7.13",
         "tymon/jwt-auth": "^2.0",
         "webpatser/laravel-uuid": "^4.0"
     },

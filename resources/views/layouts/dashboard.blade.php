@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>:: BigBucket :: Home</title>
+    <link rel="icon" href="{{ asset('images/logo.jpeg') }}" type="image/x-icon">
+    <title>CliniCare</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/themify-icons/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free-6.5.1-web/css/fontawesome.min.css') }}">
@@ -30,9 +30,9 @@
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
-            <div class="m-t-30"><img src="{{ asset('images/brand/icon_black.svg') }}" width="48" height="48"
+            <div class="m-t-30"><img src="{{ asset('images/logo.jpeg') }}" width="48" height="48"
                     alt="ArrOw"></div>
-            <p>Please wait...</p>
+            <p>يرجي الانتظار</p>
         </div>
     </div>
 
