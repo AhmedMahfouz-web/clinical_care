@@ -70,7 +70,7 @@ class MeetingController extends Controller
         $meetings = Zoom::createMeeting([
             "agenda" => 'your agenda',
             "topic" => 'your topic',
-            "type" => 2, // 1 => instant, 2 => scheduled, 3 => recurring with no fixed time, 8 => recurring with fixed time
+            "type" => 1, // 1 => instant, 2 => scheduled, 3 => recurring with no fixed time, 8 => recurring with fixed time
             "duration" => 60, // in minutes
             "timezone" => 'Asia/Dhaka', // set your timezone
             "password" => '',
