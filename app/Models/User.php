@@ -74,4 +74,18 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     {
         $this->hasMany(Report::class);
     }
+    public static function clientID()
+    {
+        return 'zoom_client_of_user';
+    }
+
+    public static function clientSecret()
+    {
+        return 'zoom_client_secret_of_user';
+    }
+
+    public static function accountID()
+    {
+        return 'zoom_account_id_of_user';
+    }
 }

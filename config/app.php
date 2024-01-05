@@ -171,6 +171,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Jubaer\Zoom\ZoomServiceProvider::class,
 
 
     ])->toArray(),
@@ -188,6 +189,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Zoom' => Jubaer\Zoom\Facades\Zoom::class,
     ])->toArray(),
 
 ];
