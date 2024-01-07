@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccessTokenController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\NotificationsController;
@@ -91,3 +92,8 @@ Route::get('get_professions', [ProfessionController::class, 'index_api']);
 Route::get('get_partners', [PartnerController::class, 'index_api']);
 
 Route::post('/token', [MeetingController::class, 'start_meeting']);
+
+
+Route::group(['prefix' => 'contact', 'controller' => ContactController::class], function ($router) {
+    Route::post('/send_message', 'send_message');
+});
