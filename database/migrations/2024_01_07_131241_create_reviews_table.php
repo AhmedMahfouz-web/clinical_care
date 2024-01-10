@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('review');
+            $table->unsignedInteger('stars');
             $table->timestamps();
         });
     }

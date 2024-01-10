@@ -10,6 +10,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationApiController;
@@ -71,6 +72,8 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('/update/{doctor}', 'update_doctor');
         Route::delete('/destroy/{doctor}', 'destroy_doctor');
     });
+
+    Route::post('/reviews', [ReviewController::class, 'store']);
 });
 
 Route::get('access_token', [AccessTokenController::class, 'generate_token']);
@@ -97,3 +100,5 @@ Route::post('/token', [MeetingController::class, 'start_meeting']);
 Route::group(['prefix' => 'contact', 'controller' => ContactController::class], function ($router) {
     Route::post('/send_message', 'send_message');
 });
+
+Route::get('/get_reviews', [ReviewController::class, 'get_reviews']);
