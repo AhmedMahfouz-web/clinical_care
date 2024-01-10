@@ -9,7 +9,7 @@ class ReviewController extends Controller
 {
     public function get_reviews()
     {
-        $reviews = Review::latest()->get();
+        $reviews = Review::with('user')->latest()->get();
 
         return response()->json([
             'status' => 'success',
