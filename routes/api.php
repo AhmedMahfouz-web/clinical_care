@@ -82,9 +82,9 @@ Route::get('notifications', [NotificationsController::class, 'get_notification']
 Route::get('notifications/{notification}', [NotificationsController::class, 'read_notification']);
 
 Route::group(['prefix' => 'doctor', 'controller' => DoctorController::class], function ($router) {
+    Route::get('/home', 'show_all_doctors_home');
     Route::get('/{doctor}', 'show_doctor');
     Route::get('/', 'show_all_doctors');
-    Route::get('/home', 'show_all_doctors_home');
 });
 
 Route::middleware(['auth:doctor'])->group(function () {
