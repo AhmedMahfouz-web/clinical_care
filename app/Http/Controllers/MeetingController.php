@@ -16,7 +16,7 @@ class MeetingController extends Controller
     {
         // Validate request data as needed
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'transaction' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
 
