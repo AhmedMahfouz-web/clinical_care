@@ -35,6 +35,10 @@ class MeetingController extends Controller
             'notes' => $request->notes
         ]);
 
+        return response()->json([
+            'meeting' => $meeting
+        ]);
+
         if (!empty($request->file))
             foreach ($request->file as $file) {
                 $file_name = $file->getClientOriginalName();
