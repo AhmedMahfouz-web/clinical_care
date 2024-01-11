@@ -41,9 +41,9 @@ Route::group(['middleware' => 'api'], function () {
 
     Route::group(['prefix' => 'user', 'controller' => UserController::class], function ($router) {
         // Route::get('/{id}', 'show_user');
-        Route::get('/edit/{id}', 'edit_user');
-        Route::post('/update/{id}', 'update_user');
-        Route::delete('/destroy/{id}', 'destroy_user');
+        Route::get('/edit/{user}', 'edit_user');
+        Route::post('/update/{user}', 'update_user');
+        Route::delete('/destroy/{user}', 'destroy_user');
     });
 
 
