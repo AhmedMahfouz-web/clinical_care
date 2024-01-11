@@ -20,6 +20,7 @@ class UserController extends Controller
     public function edit_user(User $user)
     {
 
+        $user = User::where('id', $user->user)->get();
         return response()->json([
             'message' => 'success',
             'user' => $user,
