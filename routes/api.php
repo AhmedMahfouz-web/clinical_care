@@ -103,4 +103,4 @@ Route::group(['prefix' => 'contact', 'controller' => ContactController::class], 
 
 Route::get('/get_reviews', [ReviewController::class, 'get_reviews']);
 
-Route::get('/profile/{user}', [UserController::class, 'show']);
+Route::get('/profile/{user}', [UserController::class, 'show_user']);
