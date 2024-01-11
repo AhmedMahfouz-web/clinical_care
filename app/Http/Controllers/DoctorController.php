@@ -79,7 +79,8 @@ class DoctorController extends Controller
                 'bio' => $request->bio,
                 'phone' => $request->phone,
                 'work_at' => $request->work_at,
-                'profession' => $request->profession
+                'profession' => $request->profession,
+                'degree' => $request->degree
             ]);
         }
 

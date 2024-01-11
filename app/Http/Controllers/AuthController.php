@@ -133,6 +133,7 @@ class AuthController extends Controller
             'bio' => $request->bio,
             'password' => Hash::make($request->password),
             'gender' => $request->gender,
+            'degree' => $request->degree,
         ]);
 
         // $doctor->sendEmailVerificationNotification();
