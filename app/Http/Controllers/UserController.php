@@ -32,15 +32,16 @@ class UserController extends Controller
 
         // Validate input
         $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'sometimes|required|string|min:6|confirmed',
+
         ]);
 
         // Update user
         $user->update([
-            'name' => $request->name,
-            'age' => $request->age,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
         ]);
 
         return response()->json(['message' => 'User profile updated successfully']);
