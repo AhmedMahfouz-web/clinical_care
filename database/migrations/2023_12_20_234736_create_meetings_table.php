@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->constrained('users');
-            $table->foreignUuid('doctor_id')->constrained('doctors');
-            $table->string('jisti_id')->nullable();
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignUuid('doctor_id')->nullable()->references('id')->on('doctors')->onDelete('cascade');
+            $table->string('meeting_id')->nullable();
             $table->string('status')->default('pending');
             $table->string('price');
-            $table->string('image')->nullable();
-            $table->timestamp('start_at');
+            $table->string('profession');
+            $table->string('transaction')->nullable();
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('doctor_applied')->nullable();
+            $table->timestamp('user_applied')->nullable();
             $table->timestamps();
         });
     }

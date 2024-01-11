@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Meeting;
+use App\Models\MeetingFiles;
 use App\Notifications\MeetingScheduled;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
@@ -19,31 +20,34 @@ class MeetingController extends Controller
         ]);
 
 
-        if (!empty($request->image)) {
-            $image_name = time() . '.' . $request->image->extension();
+        if (!empty($request->transaction)) {
+            $image_name = time() . '.' . $request->transaction->extension();
 
-            $request->image->move(public_path('images/transaction'), $image_name);
+            $request->transaction->move(public_path('images/transaction'), $image_name);
         }
+
         // Create a meeting
         $meeting = Meeting::create([
             'user_id' => auth()->user()->id,
-            'doctor_id' => $request->doctor_id,
-            'image' => $image_name,
-            'status' => 'pending',
-            'price' => '5000',
-            'start_at' => $request->start_at,
+            'transaction' => $image_name,
+            'price' => $request->price,
+            'profession' => $request->profession,
+            'notes' => $request->notes
         ]);
 
-        // Notify the admin about the new meeting
-        $admins = Admin::where('role', 'admin')->get();
+        if (!empty($request->file))
+            foreach ($request->file as $file) {
+                $file_name = $file->getClientOriginalName();
+                $file_extention = $file->extension();
+                $file->move(public_path('files'), $file_name . '.' . $file_extention);
 
-        if ($admins->count() > 0) {
-            foreach ($admins as $admin) {
-                $admin->notify(new MeetingScheduled($meeting));
+                MeetingFiles::create([
+                    'name' => $file_name,
+                    'path' => $file_name . '.' . $file_extention,
+                    'meeting_id' => $meeting->id
+                ]);
             }
-        }
 
-        broadcast(new MeetingScheduled($meeting))->toOthers();
 
         return response()->json(['message' => 'Meeting created successfully', 'meeting' => $meeting]);
     }
