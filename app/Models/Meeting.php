@@ -9,7 +9,7 @@ class Meeting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'doctor_id', 'jisti_id', 'image', 'status', 'price', 'start_at'];
+    protected $fillable = ['user_id', 'doctor_id', 'meeting_id', 'transaction', 'status', 'price', 'start_at', 'profession', 'doctor_applied', 'user_applied'];
 
     public function user()
     {
