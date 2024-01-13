@@ -69,7 +69,7 @@
                                                         <span>{{ $meeting->status }}</span>
                                                     </td>
                                                     <td><span>{{ $meeting->start_at }}</span></td>
-                                                    @if ($meeting->doctro_id != null)
+                                                    @if ($meeting->doctro_id == null)
                                                         <td><a href="{{ route('edit meeting', $meeting->id) }}"
                                                                 class="btn btn-default">عرض</a></td>
                                                     @endif
