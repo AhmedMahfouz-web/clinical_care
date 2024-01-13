@@ -13,6 +13,14 @@
             <li {{ Request::is('dashboard') ? 'class=active' : '' }}><a href="{{ route('dashboard') }}"><i
                         class="ti-home"></i><span>الرئيسية</span></a></li>
 
+            <li {{ Request::is('dashboard/meeting/*', 'dashboard/meeting') ? 'class=active' : '' }}>
+                <a href="javascript:void(0)" class="has-arrow"><i class="ti-user "></i><span>طلبات المقابلات</span>
+                </a>
+                <ul>
+                    <li><a href="{{ route('show meetings') }}">عرض طلبات المقابلات</a></li>
+                </ul>
+            </li>
+
             <li {{ Request::is('dashboard/report/*', 'dashboard/report') ? 'class=active' : '' }}>
                 <a href="javascript:void(0)" class="has-arrow"><i class="ti-user "></i><span>طلبات التقارير</span>
                 </a>
@@ -22,7 +30,8 @@
                 </ul>
             </li>
             <li {{ Request::is('dashboard/reservation/*', 'dashboard/reservation') ? 'class=active' : '' }}>
-                <a href="{{ route('show reservations') }}" class="has-arrow"><i class="ti-user "></i><span>حجوزات الاشعة
+                <a href="{{ route('show reservations') }}" class="has-arrow"><i class="ti-user "></i><span>حجوزات
+                        الاشعة
                         و التحاليل</span>
                 </a>
                 {{-- <ul>
