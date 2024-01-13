@@ -51,7 +51,12 @@
                                                 <tr>
                                                     <td><span>{{ $meeting->user->first_name . ' ' . $meeting->user->last_name }}</span>
                                                     </td>
-                                                    <td><span>{{ $meeting->doctor->first_name . ' ' . $meeting->doctor->last_name }}</span>
+                                                    <td>
+                                                        @if ($meeting->doctor_id == null)
+                                                            <span class="muted-text">لم يحدد بعد</span>
+                                                        @else
+                                                            <span>{{ $meeting->doctor->first_name . ' ' . $meeting->doctor->last_name }}</span>
+                                                        @endif
                                                     </td>
                                                     <td><span><img data-toggle="modal" data-target="#modal_5"
                                                                 class="meeting_transaction"
