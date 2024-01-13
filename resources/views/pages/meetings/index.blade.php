@@ -61,7 +61,7 @@
                                                     <td><span><img data-toggle="modal" data-target="#modal_5"
                                                                 class="meeting_transaction"
                                                                 style="max-height: 100px; max-width: 100px"
-                                                                src="{{ asset('images/transaction/' . $meeting->image) }}"
+                                                                src="{{ asset('images/transaction/' . $meeting->transaction) }}"
                                                                 alt=""></span>
                                                     </td>
                                                     <td><span>{{ $meeting->price }}</span></td>
@@ -71,7 +71,7 @@
                                                     <td><span>{{ $meeting->start_at }}</span></td>
                                                     @if ($meeting->doctor_id == null)
                                                         <td><a href="{{ route('edit meeting', $meeting->id) }}"
-                                                                class="btn btn-secondary">عرض </a></td>
+                                                                class="btn btn-secondary">تحديد دكتور </a></td>
                                                     @endif
                                                 </tr>
                                             @endforeach
