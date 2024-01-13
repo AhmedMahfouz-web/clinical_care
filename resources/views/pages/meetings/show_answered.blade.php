@@ -67,7 +67,7 @@
                                     action="{{ route('assign doctor meeting', $meeting->id) }}" id="assign_doctor"
                                     method="post">
                                     @csrf
-                                    <div class="col-lg-6">
+                                    <div class="col-6">
                                         <h6 class="text-muted">تعيين دكتور:</h6>
                                         <select name="doctor_id" id="doctor_id" class="form-control show-tick ms select2"
                                             data-placeholder="تعيين دكتور">
@@ -78,7 +78,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-6">
                                         <h6 class="text-muted">تحديد المعاد :</h6>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -99,6 +99,8 @@
                             </div>
                         @endif
                         <div class="text-left">
+                            <button type="submit" form="assign_doctor" href="{{ route('show meetings') }}"
+                                class="btn btn-md btn-primary">رجوع</button>
                             <a href="{{ route('show meetings') }}" class="btn btn-md btn-secondary">رجوع</a>
                         </div>
                     </div>
