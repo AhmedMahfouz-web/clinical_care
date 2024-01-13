@@ -71,7 +71,7 @@
                                                     <td><span>{{ $meeting->start_at }}</span></td>
                                                     @if ($meeting->doctro_id == null)
                                                         <td><a href="{{ route('edit meeting', $meeting->id) }}"
-                                                                class="btn btn-secondary">عرض</a></td>
+                                                                class="btn btn-secondary">{{ $meeting->doctor_id }}</a></td>
                                                     @endif
                                                 </tr>
                                             @endforeach
