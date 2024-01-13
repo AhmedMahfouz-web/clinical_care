@@ -66,25 +66,7 @@
                                                     </td>
                                                     <td><span>{{ $meeting->price }}</span></td>
                                                     <td>
-                                                        <form class="status-form"
-                                                            action="{{ route('update status', $meeting->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            <select class="status-select" name="status"
-                                                                class="selectpicker" title="حالة الميتينج">
-                                                                <option value="pending"
-                                                                    {{ $meeting->status == 'pending' ? 'selected' : '' }}>
-                                                                    قيد
-                                                                    الانتظار</option>
-                                                                <option value="approve"
-                                                                    {{ $meeting->status == 'approve' ? 'selected' : '' }}>
-                                                                    سماح
-                                                                </option>
-                                                                <option value="cancelled"
-                                                                    {{ $meeting->status == 'cancelled' ? 'selected' : '' }}>
-                                                                    رفض</option>
-                                                            </select>
-                                                        </form>
+                                                        <span>{{ $meeting->status }}</span>
                                                     </td>
                                                     <td><span>{{ $meeting->start_at }}</span></td>
 
