@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Doctor;
 use App\Models\Meeting;
 use App\Models\MeetingFiles;
 use App\Notifications\MeetingScheduled;
@@ -35,10 +36,6 @@ class MeetingController extends Controller
             'notes' => $request->notes
         ]);
 
-        return response()->json([
-            'meeting' => $meeting
-        ]);
-
         if (!empty($request->file))
             foreach ($request->file as $file) {
                 $file_name = $file->getClientOriginalName();
@@ -63,40 +60,26 @@ class MeetingController extends Controller
         return view('pages.meetings.index', compact('meetings'));
     }
 
-    public function update_status(Request $request, Meeting $meeting)
+    public function edit(Meeting $meeting)
     {
+        $meeting->load(['files', 'user']);
+        $doctors = Doctor::where('profession', $meeting->profession)->get();
+        return view('pages.meeting.show_answered', compact(['meeting', 'doctros']));
+    }
+
+    public function assign_doctor(Request $request, Meeting $meeting)
+    {
+        $request->validate([
+            'start_at' => 'required',
+            'doctor_id' => 'required'
+        ]);
+
         $meeting->update([
-            'status' => $request->status,
-            'start_at' => $meeting->start_at
+            'start_at' => $request->start_at,
+            'doctor_id' => $request->doctor_id,
+            'meeting_id' => $meeting->user_id . $request->doctor_id
         ]);
 
         return redirect()->route('show meetings');
-    }
-
-    public function start_meeting()
-    {
-        $meetings = Zoom::createMeeting([
-            "agenda" => 'your agenda',
-            "topic" => 'your topic',
-            "type" => 1, // 1 => instant, 2 => scheduled, 3 => recurring with no fixed time, 8 => recurring with fixed time
-            "duration" => 60, // in minutes
-            "timezone" => 'Asia/Dhaka', // set your timezone
-            "password" => '',
-            "template_id" => 'set your template id', // set your template id  Ex: "Dv4YdINdTk+Z5RToadh5ug==" from https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingtemplates
-            "pre_schedule" => false,  // set true if you want to create a pre-scheduled meeting
-            "settings" => [
-                'join_before_host' => false, // if you want to join before host set true otherwise set false
-                'host_video' => false, // if you want to start video when host join set true otherwise set false
-                'participant_video' => false, // if you want to start video when participants join set true otherwise set false
-                'mute_upon_entry' => false, // if you want to mute participants when they join the meeting set true otherwise set false
-                'waiting_room' => false, // if you want to use waiting room for participants set true otherwise set false
-                'audio' => 'both', // values are 'both', 'telephony', 'voip'. default is both.
-                'auto_recording' => 'none', // values are 'none', 'local', 'cloud'. default is none.
-                'approval_type' => 0, // 0 => Automatically Approve, 1 => Manually Approve, 2 => No Registration Required
-            ],
-
-        ]);
-
-        return response()->json([$meetings]);
     }
 }

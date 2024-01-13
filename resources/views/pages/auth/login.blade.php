@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Webpixels">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>:: BigBucket :: Home</title>
+    <title>CliniCare | تسجيل دخول</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/themify-icons/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/font-awesome.min.css') }}">
@@ -32,7 +32,7 @@
             <div class="vertical-align-middle auth-main">
                 <div class="auth-box">
                     <div class="top">
-                        <img src="{{ asset('images/brand/icon_black.svg') }}" alt="Lucid">
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Lucid">
                         <strong>POS</strong>
                     </div>
                     <div class="card">

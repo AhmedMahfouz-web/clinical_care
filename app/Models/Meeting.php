@@ -9,7 +9,18 @@ class Meeting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'doctor_id', 'meeting_id', 'transaction', 'status', 'price', 'start_at', 'profession', 'doctor_applied', 'user_applied'];
+    protected $fillable = [
+        'user_id',
+        'doctor_id',
+        'meeting_id',
+        'transaction',
+        'status',
+        'price',
+        'start_at',
+        'profession',
+        'doctor_applied',
+        'user_applied'
+    ];
 
     public function user()
     {
@@ -19,5 +30,10 @@ class Meeting extends Model
     public function doctor()
     {
         return $this->belongsTo(Doctor::class);
+    }
+
+    public function files()
+    {
+        return $this->hasMany(MeetingFiles::class);
     }
 }
