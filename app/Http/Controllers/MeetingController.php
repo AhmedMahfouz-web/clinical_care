@@ -79,7 +79,7 @@ class MeetingController extends Controller
             'start_at' => $request->start_at,
             'doctor_id' => $request->doctor_id,
             'meeting_id' => $meeting->user_id . $request->doctor_id,
-            'status' => 'accepted'
+            'status' => 'approved'
         ]);
 
         Notification::create([
