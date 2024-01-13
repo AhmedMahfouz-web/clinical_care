@@ -64,7 +64,7 @@ class MeetingController extends Controller
     {
         $meeting->load(['files', 'user']);
         $doctors = Doctor::where('profession', $meeting->profession)->get();
-        return view('pages.meeting.show_answered', compact(['meeting', 'doctors']));
+        return view('pages.meetings.show_answered', compact(['meeting', 'doctors']));
     }
 
     public function assign_doctor(Request $request, Meeting $meeting)
