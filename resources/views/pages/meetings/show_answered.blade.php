@@ -99,7 +99,7 @@
                             </div>
                         @endif
                         <div class="text-left">
-                            <a href="{{ route('show answered meetings') }}" class="btn btn-md btn-secondary">رجوع</a>
+                            <a href="{{ route('show meetings') }}" class="btn btn-md btn-secondary">رجوع</a>
                         </div>
                     </div>
                 </div>

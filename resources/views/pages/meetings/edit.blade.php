@@ -32,7 +32,7 @@
                             </div>
                             <div class="text-left mt-5">
                                 <button type="submit" class="btn btn-md btn-primary">حفظ</button>
-                                <a href="{{ route('show tests') }}" class="btn btn-md btn-secondary">الغاء</a>
+                                <a href="{{ route('show meetings') }}" class="btn btn-md btn-secondary">الغاء</a>
                             </div>
                         </form>
                     </div>
