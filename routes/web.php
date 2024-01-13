@@ -112,7 +112,7 @@ Route::group(['prefix' => 'dashboard'], function ($router) {
         Route::group(['prefix' => 'meeting'], function ($router) {
             Route::group(['controller' => MeetingController::class], function () {
                 Route::get('/', 'get_meetings')->name('show meetings');
-                Route::post('edit/{meeting}', 'edit')->name('edit meeting');
+                Route::get('edit/{meeting}', 'edit')->name('edit meeting');
                 Route::post('assign_doctor/{meeting}', 'assign_doctor')->name('assign doctor meeting');
             });
         });
