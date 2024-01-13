@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Doctor;
 use App\Models\Meeting;
 use App\Models\MeetingFiles;
+use App\Models\Notification;
 use App\Notifications\MeetingScheduled;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
@@ -77,7 +78,22 @@ class MeetingController extends Controller
         $meeting->update([
             'start_at' => $request->start_at,
             'doctor_id' => $request->doctor_id,
-            'meeting_id' => $meeting->user_id . $request->doctor_id
+            'meeting_id' => $meeting->user_id . $request->doctor_id,
+            'status' => 'accepted'
+        ]);
+
+        Notification::create([
+            'receiver_id' => $request->doctor_id,
+            'model' => 'meeting',
+            'model_id' => $meeting->id,
+            'body' => 'تم الحاقك لمقابلة جديدة في الوقت ' . $meeting->start_at,
+        ]);
+
+        Notification::create([
+            'receiver_id' => $meeting->user_id,
+            'model' => 'meeting',
+            'model_id' => $meeting->id,
+            'body' => 'تم الحاق دكتور لعمل مقابلة جديدة في الوقت ' . $meeting->start_at,
         ]);
 
         return redirect()->route('show meetings');
