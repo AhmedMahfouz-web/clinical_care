@@ -14,6 +14,7 @@ class Meeting extends Model
         'doctor_id',
         'meeting_id',
         'transaction',
+        'notes',
         'status',
         'price',
         'start_at',

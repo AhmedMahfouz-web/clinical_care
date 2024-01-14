@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('meeting_id')->nullable();
             $table->string('status')->default('pending');
             $table->string('price');
+            $table->string('notes');
             $table->string('profession');
             $table->string('transaction')->nullable();
             $table->timestamp('start_at')->nullable();
