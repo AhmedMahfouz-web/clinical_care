@@ -98,4 +98,25 @@ class MeetingController extends Controller
 
         return redirect()->route('show meetings');
     }
+
+    public function get_meetings_front()
+    {
+        if (auth()->user() != null) {
+            $meetings = Meeting::where('user_id', auth()->user()->id)->latest()->get();
+            return response()->json([
+                'status' => 'success',
+                'meetings' => $meetings,
+            ]);
+        } else {
+            $meetings = Meeting::where('doctor_id', auth()->guard('doctor')->user()->id)->latest()->get();
+            return response()->json([
+                'status' => 'success',
+                'meetings' => $meetings,
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error'
+        ]);
+    }
 }
